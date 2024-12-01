@@ -1,0 +1,201 @@
+#top-bar {
+    text-align: center;
+}
+
+.thread-container {
+    width: 100%;
+    min-width: 390px;
+    max-width: 624px;
+    background-color: white;
+    flex-grow: 1;
+    margin: 0 auto;
+    border: solid 1px #aeaeae;
+    border-radius: 16px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.thread-container::-webkit-scrollbar {
+    display: none;
+
+}
+
+#thread-display-section {
+    width: fit-content;
+    margin: 0 auto;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+}
+
+#thread-display-section .dropdown {
+    padding: 12px 0;
+    font-size: 20px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+#postThread .modal-body #create-thread-body {
+    min-height: 80px;
+    width: 100%;
+    min-width: 340px;
+    padding: 8px 4px;
+    border: 0;
+}
+
+#postThread .modal-body #create-thread-body:focus {
+    min-height: 80px;
+    width: 100%;
+    min-width: 340px;
+    outline: 0;
+    padding: 8px 4px;
+    box-sizing: border-box;
+}
+
+#postThread .modal-body label {
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
+
+#postThread .modal-body label:hover {
+    cursor: pointer;
+    background-color: #dfdfdf;
+    border-radius: 8px;
+}
+
+#postThread .modal-body .image-card {
+    position: relative;
+    max-width: 100%;
+    width: fit-content;
+    margin-top: 2px;
+}
+
+#postThread .modal-body .image-card button {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 100%;
+}
+
+#postThread .modal-body .image-card img {
+    max-width: 100%;
+}
+
+
+
+#replyThread .modal-body #reply-thread-body {
+    min-height: 80px;
+    width: 100%;
+    min-width: 340px;
+    padding: 8px 4px;
+    border: 0;
+}
+
+#replyThread .modal-body #reply-thread-body:focus {
+    min-height: 80px;
+    width: 100%;
+    min-width: 340px;
+    outline: 0;
+    padding: 8px 4px;
+    box-sizing: border-box;
+}
+
+.avatar-is-replied {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.vertical-reply-bar {
+    width: 2px;
+    flex-grow: 1;
+    transform: translateX(-80%);
+    background-color: #aeaeae;
+}
+
+@media only screen and (max-width:760px) {
+
+    .thread-container {
+        width: 100%;
+        max-width: 100%;
+        min-width: 390px;
+        background-color: white;
+        border-radius: 0;
+        flex-grow: 1;
+        border: 0;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+    }
+
+    .thread-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    #thread-display-section {
+        width: 100vw;
+        margin: 0 auto;
+        height: calc(100vh - 48px - 68px);
+        box-sizing: border-box;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    #thread-display-section .dropdown {
+        padding: 0;
+        font-size: 20px;
+        width: 100%;
+        height: fit-content;
+        margin: 0 auto;
+        z-index: 1;
+        /* display: none; */
+    }
+
+    #thread-display-section #triggerId {
+        display: none;
+    }
+
+    #thread-display-section .dropdown-menu {
+        display: flex;
+        border: none;
+        width: 100%;
+        position: relative;
+        height: fit-content;
+        z-index: 1;
+        padding: 0;
+
+    }
+
+    #thread-display-section .dropdown-menu button {
+        border-radius: 0;
+        appearance: block;
+    }
+
+    #thread-display-section .dropdown-item {
+        padding: 12px 0;
+        border-radius: 0;
+        width: 50%;
+        border-top: solid 1px #aeaeae;
+        border-bottom: solid 1px #aeaeae;
+        color: #aeaeae;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    #thread-display-section .on-active-page {
+        color: #000000;
+        border-top: solid 1px #000000;
+        border-bottom: solid 1px #000000;
+    }
+}

@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Needle - Home Feed</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/thread-feed-display.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="header-bar">
+            <a class="logo" href="/">
+                <img src="/images/svg/logo.svg" alt="logo">
+            </a>
+            <div class="user-dropdown-menu">
+                <div class="dropdown open">
+                    
+                    <img src="/images/svg/list.svg" alt="avatar" 
+                    class="dropdown-toggle" 
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    style="border-color: #aeaeae;width: 36px; height:36px;">
+                    <div class="dropdown-menu" style="border: 0; background: none; border: 0">
+                        <ul class="nav-dropdown" >
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/home-feed" aria-current="page"><i class="bi bi-house-door-fill"></i> <span>Home</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" aria-current="page"><i class="bi bi-search"></i> <span>Search</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="" data-bs-toggle="modal" data-bs-target="#postThread" aria-current="page"><i class="bi bi-plus-lg"></i> <span>Post</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/notifications" aria-current="page"><i class="bi bi-bell-fill"></i> <span>Notification</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/cur-profile" aria-current="page"><i class="bi bi-person-circle"></i> <span>Profile</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/greetings" aria-current="page"><i class="bi bi-arrow-bar-left"></i> <span>Logout</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </header>
+    <main>
+        <div id="mobile-header"></div>
+        <!-- Side bar -->
+        <div class=" desktop-navbar">
+            <a class="navbar-logo" href="/">
+                <img src="/images/svg/logo.svg" alt="logo">
+            </a>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active nav-current" href="/home-feed" aria-current="page"><i class="bi bi-house-door-fill"></i>
+                        <span>Home</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href=""  aria-current="page"><i class="bi bi-search"></i>
+                        <span>Search</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href=""  data-bs-toggle="modal" data-bs-target="#postThread" aria-current="page"><i class="bi bi-plus-lg"></i>
+                        <span>Post</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/notifications" aria-current="page"><i class="bi bi-bell-fill"></i>
+                        <span>Notification</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/cur-profile" aria-current="page"><i class="bi bi-person-circle"></i>
+                        <span>Profile</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/greetings" aria-current="page"><i class="bi bi-arrow-bar-left"></i>
+                        <span>Logout</span></a>
+                </li>
+            </ul>
+        </div>
+        <!-- Thread area -->
+
+        <!-- type="button"
+                class="btn btn-primary btn-lg"
+                data-bs-toggle="modal"
+                data-bs-target="#modalId" -->
+        {{{body}}}
+        <!-- Modals -->
+        <!--  Modal trigger button  -->
+
+
+        <!-- Modal Body-->
+        <div class="modal fade" id="postThread" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">
+                            Creating thread
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="d-flex flex-row">
+                                <div class="avatar-and-follow-icon">
+                                    <img src="/images/avatar.png" alt="avatar"
+                                        class="border border-1 border-dark rounded-circle"
+                                        style="width: 36px; height:36px;">
+                                </div>
+                                <div
+                                    class="card-content border border-0 d-flex flex-column justify-content-between w-100 px-2">
+                                    <p class="fw-bold d-inline-block my-1">Username</p>
+
+                                    <textarea name="thread-body" placeholder="Needle your thread here..."
+                                        id="create-thread-body" maxlength="1000"></textarea>
+
+                                    <div class="image-card">
+                                        <img id="create-thread-body-image" src="" alt="">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                <label for="thread-image"><i class="bi bi-image-fill fs-5 me-2"></i>Upload an
+                                    image</label>
+                                <input id="thread-image" class="d-none" type="file" accept="image/png, image/jpeg">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal"
+                            onclick="clearThreadForm()">
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-dark" id="liveToastBtn" data-bs-dismiss="modal" onclick="closeModalAndTriggerToast(event)">Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="replyThread" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">
+                            Replying a thread
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="d-flex flex-row">
+                                <div class="avatar-is-replied">
+                                    <div class="avatar-and-follow-icon ">
+                                        <img src="/images/avatar.png" alt="avatar"
+                                            class="border border-1 border-dark rounded-circle"
+                                            style="width: 36px; height:36px;">
+                                        <i class="follow-icon-avatar bi bi-plus-circle"></i>
+                                    </div>
+                                    <div class="vertical-reply-bar"></div>
+                                </div>
+
+                                <div class="card-content border border-0 px-2">
+                                    <div class="card-header border-0 bg-white border-black rounded-0 p-0 ">
+                                        <div class="username-date d-flex justify-content-between">
+                                            <span>
+                                                <p class="fw-bold d-inline-block my-0">Username</p>
+                                                <i class="bi bi-clock"></i>
+                                                <span>dd/mm/yyyy</span>
+                                            </span>
+                                            <!-- <i class="bi bi-three-dots"></i> -->
+                                        </div>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas,
+                                            nulla?</div>
+                                        <div class="overflow-hidden rounded-2 border border-1 border-dark"
+                                            style="margin-top: 8px; display: none;">
+                                            <img src="" alt="Image of thread" style="width: 100%;">
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="card-footer bg-white border-top-0">
+                                            <p class="d-inline-block"><i class="bi bi-chat-left-text"></i> Replies</p>
+                                            <p class="d-inline-block"><i class="bi bi-heart"></i> Likes</p>
+                                        </div> -->
+                                </div>
+
+                            </div>
+                            <div class="d-flex flex-row">
+                                <div class="avatar-and-follow-icon">
+                                    <img src="/images/avatar.png" alt="avatar"
+                                        class="border border-1 border-dark rounded-circle"
+                                        style="width: 36px; height:36px;">
+                                </div>
+                                <div
+                                    class="card-content border border-0 d-flex flex-column justify-content-between w-100 px-2">
+                                    <p class="fw-bold d-inline-block my-1">Username <span
+                                            class="text-primary fw-medium">replying @username</span></p>
+
+                                    <textarea name="thread-body" placeholder="Replying..." id="reply-thread-body"
+                                        maxlength="1000"></textarea>
+
+                                    <div class="image-card">
+                                        <img id="create-thread-body-image" src="" alt="">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- <div>
+                                    <label for="thread-image"><i class="bi bi-image-fill fs-5 me-2"></i>Upload an image</label>
+                                    <input id="thread-image" class="d-none" type="file" accept="image/png, image/jpeg">
+                                    
+                                </div> -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal"
+                            onclick="clearThreadForm()">
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-dark">Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Button trigger modal -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="followPopup" tabindex="-1" role="dialog" aria-labelledby="followPopup"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="followPopupId">
+                            Follow a user
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid d-grid">
+                            <div class="row">
+                                <div class="col-9">
+                                    <h4>Displayname</h4>
+                                    <h6 class="fw-light">@username</h6>
+                                    <p class="w-100 px-2">bio</p>
+                                </div>
+                                <div class="col-3">
+                                    <img src="/images/avatar.png" alt="user-avatar"
+                                        class=" border border-1 border-dark rounded-circle w-100">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p class="py-2">9,999 followers</p>
+                                <button class="btn btn-dark" onclick="changeFollowStatus(event)">follow
+                                    @username</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="toast-container bottom-0 mb-2 start-50 translate-middle-x" >
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                <img src="/images/svg/logo.svg" class="me-2" alt="..." width="36px" height="36px">
+                <strong class="me-auto">Your thread is needled</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <a type="button" class="btn btn-dark btn-sm" href="/thread.html">View now</a>
+                    <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="toast">Later</button>
+                </div>
+            </div>
+        </div>
+        <!-- <script>
+                var modalId = document.getElementById('modalId');
+            
+                modalId.addEventListener('show.bs.modal', function (event) {
+                      // Button that triggered the modal
+                      let button = event.relatedTarget;
+                      // Extract info from data-bs-* attributes
+                      let recipient = button.getAttribute('data-bs-whatever');
+            
+                    // Use above variables to manipulate the DOM
+                });
+            </script> -->
+
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+
+
+    <!-- Custom script -->
+    <script src="/scripts/createReplyThreadController.js"></script>
+</body>
+
+</html>
