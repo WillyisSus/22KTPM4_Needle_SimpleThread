@@ -1,0 +1,45 @@
+<div id="thread-display-section">
+    <div class="thread-container">
+        <div class="profile-container" style="padding: 20px;">
+            <div class="d-flex flex-row justify-content-between" style="margin-bottom:10px">
+                <div>
+                    <h4><b>Display Name</b></h4>
+                    Username
+                </div>
+                <div class="avatar-and-follow-icon">
+                    <img src="./images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle"
+                        style="width: 66px; height:66px;">
+                </div>
+            </div>
+            <div>
+                bio
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between">
+                <div class="" style="color:grey;">
+                    9,999 followers
+                </div>
+
+                <a role="button" class="btn btn-dark col-12 col-md-4" style=" margin-top: 10px"
+                    onclick="followClicked(this)">
+                    Follow @username
+                </a>
+
+            </div>
+
+            <div style="text-align: center; border-top: 2px solid lightgray;  padding: 10px 0px; margin: 10px 0px">
+                Threads of @username
+            </div>
+
+            {{>thread-card}}
+            {{>thread-card}}
+            {{>thread-card}}
+            {{>thread-card}}
+
+
+
+
+
+        </div>
+    </div>
+</div>

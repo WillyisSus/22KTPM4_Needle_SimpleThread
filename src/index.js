@@ -35,3 +35,4 @@ app.get("/", (req, res) => res.render("home-feed"));
 app.get("/home-feed", (req, res) => res.render("home-feed"));
 app.get("/for-you-page", (req, res) => res.render("for-you-page"));
 app.get("/cur-profile", (req, res) => res.render("cur-profile"));
+app.get("/profile", (req, res) => res.render("profile"));

@@ -27,44 +27,19 @@
 
             </div>
 
-            <div
-                style="text-align: center; border-top: 2px solid lightgray; border-bottom: 2px solid lightgray; padding: 10px 0px; margin: 10px 0px">
+            <div style="text-align: center; border-top: 2px solid lightgray;  padding: 10px 0px; margin: 10px 0px">
                 Threads of @username
             </div>
 
             <!-- Threads -->
 
-            <div class="d-flex flex-row justify-content-between">
-                <div class="avatar-and-follow-icon">
-                    <img src="././images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle"
-                        style="width: 36px; height:36px;">
-                </div>
-                <div style="padding: 8px; width: 100%;">
-                    <div class="border-0 bg-white border-black rounded-0 p-0">
-                        <div class="username-date d-flex justify-content-between">
-                            <span>
-                                <p class="fw-bold d-inline-block my-0">Username</p>
-                                <i class="bi bi-clock"></i>
-                                <span>dd/mm/yyyy</span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="card-body p-0" style="margin: 8px 0">
-                        <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, nulla?
-                        </div>
-                    </div>
 
-                    <div class="card-footer bg-white border-top-0 p-0">
-                        <p class="d-inline-block" data-bs-toggle="modal" data-bs-target="#replyThread"><i
-                                class="bi bi-chat-left-text"></i> Replies</p>
-                        <p class="d-inline-block"><i class="bi bi-heart"></i> Likes</p>
-                    </div>
-                </div>
-                <div>
-                    <i class="bi bi-three-dots"></i>
-                </div>
+            {{>needle-your-thread}}
+            {{>thread-card}}
+            {{>thread-card}}
+            {{>thread-card}}
+            {{>thread-card}}
 
-            </div>
 
             <!-- Modal for 'follow-' -->
             <div class="modal fade" id="followModal" tabindex="-1" aria-labelledby="exampleModalLabel"
