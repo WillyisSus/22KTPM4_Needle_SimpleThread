@@ -1,0 +1,163 @@
+<div id="thread-display-section">
+    <div class="thread-container">
+        <div class="profile-container" style="padding: 20px;">
+            <div class="d-flex flex-row justify-content-between" style="margin-bottom:10px">
+                <div>
+                    <h4><b>Display Name</b></h4>
+                    Username
+                </div>
+                <div class="avatar-and-follow-icon">
+                    <img data-bs-toggle="modal" data-bs-target="#changeAvatar" src="./images/avatar.png" alt="avatar"
+                        class="border border-1 border-dark rounded-circle" style="width: 66px; height:66px;">
+                </div>
+            </div>
+            <div>
+                bio
+            </div>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between">
+                <div data-bs-toggle="modal" data-bs-target="#followModal" style="color:grey;">
+                    9,999 followers ● 9,999 following
+                </div>
+
+                <a data-bs-toggle="modal" data-bs-target="#editProfile" role="button"
+                    class="btn btn-dark col-12 col-md-3" style=" margin-top: 10px">
+                    Edit Info
+                </a>
+
+            </div>
+
+            <div
+                style="text-align: center; border-top: 2px solid lightgray; border-bottom: 2px solid lightgray; padding: 10px 0px; margin: 10px 0px">
+                Threads of @username
+            </div>
+
+            <!-- Threads -->
+
+            <div class="d-flex flex-row justify-content-between">
+                <div class="avatar-and-follow-icon">
+                    <img src="././images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle"
+                        style="width: 36px; height:36px;">
+                </div>
+                <div style="padding: 8px; width: 100%;">
+                    <div class="border-0 bg-white border-black rounded-0 p-0">
+                        <div class="username-date d-flex justify-content-between">
+                            <span>
+                                <p class="fw-bold d-inline-block my-0">Username</p>
+                                <i class="bi bi-clock"></i>
+                                <span>dd/mm/yyyy</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body p-0" style="margin: 8px 0">
+                        <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, nulla?
+                        </div>
+                    </div>
+
+                    <div class="card-footer bg-white border-top-0 p-0">
+                        <p class="d-inline-block" data-bs-toggle="modal" data-bs-target="#replyThread"><i
+                                class="bi bi-chat-left-text"></i> Replies</p>
+                        <p class="d-inline-block"><i class="bi bi-heart"></i> Likes</p>
+                    </div>
+                </div>
+                <div>
+                    <i class="bi bi-three-dots"></i>
+                </div>
+
+            </div>
+
+            <!-- Modal for 'follow-' -->
+            <div class="modal fade" id="followModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="row">
+                            <div id="followersCol" class="d-flex flex-column justify-content-center col"
+                                style="font-weight: bold;">
+                                <div style="text-align: center;">Followers</div>
+
+                                <div style="text-align: center; border-bottom: 2px solid;">9,999</div>
+
+                            </div>
+
+                            <div id="followingCol" class="d-flex flex-column justify-content-center col">
+                                <div style="text-align: center;">Following</div>
+
+                                <div style="text-align: center; border-bottom: 2px solid;">9,999</div>
+
+                            </div>
+
+
+                        </div>
+                        <div id="followerModalBody" class="modal-body overflow-scroll d-flex flex-column gap-2"
+                            style="max-height: 500px;">
+                            {{>modal-body-followers}}
+                            {{>modal-body-followers}}
+                            {{>modal-body-followers}}
+                        </div>
+                        <div id="followingModalBody" class="modal-body overflow-scroll d-flex flex-column gap-2 d-none"
+                            style="max-height: 500px;">
+                            {{>modal-body-following}}
+                            {{>modal-body-following}}
+                            {{>modal-body-following}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal for 'edit-profile' -->
+            <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Updating Profile</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="d-flex flex-column gap-2">
+                                <div class="form-group">
+                                    <label for="Name"><b>Name</b></label>
+                                    <input id="Name" class="form-control" value="Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="bio"><b>Bio</b></label>
+                                    <input id="bio" class="form-control">
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="submit" class="btn btn-dark">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for 'change-avatar' -->
+            <div class="modal fade" id="changeAvatar" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+
+                    <div class="modal-content p-2">
+                        <div class="modal-header justify-content-center" style="text-align: center;">
+                            <img src="/images/avatar.png" alt="avatar"
+                                class="border border-1 border-dark rounded-circle" style="width: 56px; height:56px;">
+                        </div>
+
+                        <div class="modal-body d-flex flex-column gap-2">
+                            <button type="submit" class="btn btn-outline-dark">From Device</button>
+                            <button type="submit" class="btn btn-outline-dark">From Site</button>
+                            <button type="submit" class="btn btn-outline-danger">Remove Avatar</button>
+
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="submit" class="btn btn-dark">Save changes</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
