@@ -26,7 +26,7 @@ app.engine('hbs', expressHbs.engine({
         }
     }
 }));
-
+app.use(express.json());
 //cau hinh cookie
 // app.use(cookieParser(process.env.COOKIE_SECRET || "keyboard cat"));
 
@@ -37,7 +37,7 @@ app.engine('hbs', expressHbs.engine({
 
 app.set("view engine", "hbs");
 app.listen(port, () => console.log(`Example app listening on port ${port}`))
-
+// app.use("/thread", require('./router/threadRouter'))
 app.get("/", (req, res) => res.render("home-feed"));
 app.get("/home-feed", (req, res) => res.render("home-feed"));
 app.get("/for-you-page", (req, res) => res.render("for-you-page"));
