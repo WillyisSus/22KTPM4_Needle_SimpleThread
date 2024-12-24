@@ -1,9 +1,13 @@
+require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const app = express();
 const port = 3000;
 const expressHbs = require('express-handlebars');
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const bcrypt = require("bcrypt");
+const user = []
 
 // cấu hình giao thức
 console.log(__dirname)
@@ -27,13 +31,23 @@ app.engine('hbs', expressHbs.engine({
     }
 }));
 
-//cau hinh cookie
-// app.use(cookieParser(process.env.COOKIE_SECRET || "keyboard cat"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-//cau hinh session
-// app.use(session({
-//     secret: process.env.SESSION_SECRET
+// cau hinh cookie
+app.use(cookieParser(process.env.COOKIE_SECRET || "keyboard cat"));
 
+// cau hinh session
+app.use(session({
+    secret: process.env.SESSION_SECRET || "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60, // 1 hour
+        httpOnly: true,
+        secure: false,
+    },
+}));
 
 app.set("view engine", "hbs");
 app.listen(port, () => console.log(`Example app listening on port ${port}`))
