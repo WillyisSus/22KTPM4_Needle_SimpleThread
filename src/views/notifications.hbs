@@ -1,0 +1,494 @@
+<div id="thread-display-section">
+        <div class="thread-container">
+            <div class="notification-card d-flex flex-row" >
+                <div class="notification-category">
+                    <i class="bi bi-chat" style="font-size: 2em; color: #000000;"></i>
+                </div>
+                <div class="card-content border border-0">
+                    <div class="card-header border-0 bg-white border-black rounded-0 p-0 " > 
+                        <div class="username-date d-flex justify-content-between">
+                            <span>
+                            <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                            </span>
+                            <div>
+                            <div class="dropdown open">
+                                <a class="btn btn-light" href="/thread"><i class="bi bi-arrow-right"></i></a>
+                                <button class="btn btn-light"
+                                    type="button"
+                                    id="triggerId"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item text-success" href="#"><i class="bi bi-check-lg" style="font-size: 1rem;"></i> Mark as read</button>
+                                    <button class="dropdown-item text-danger" href="#"><i class="bi bi-x-lg" style="font-size: 1rem;"></i> Remove notifications</button>
+                                </div>
+                            </div>
+                            </div>  
+
+                            
+                        </div> 
+                    </div>
+                    <div class="card-body p-0">
+                        <div class=""><span class="fw-bold">Username</span> replied your thread</div>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-card d-flex flex-row">
+                <div class="notification-category">
+                    <i class="bi bi-chat" style="font-size: 2em; color: #000000;"></i>
+                </div>
+                <div class="card-content border border-0">
+                    <div class="card-header border-0 bg-white border-black rounded-0 p-0 " > 
+                        <div class="username-date d-flex justify-content-between">
+                            <span>
+                            <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                            </span>
+                            <div class="dropdown open">
+                                <a class="btn btn-light" href="/thread"><i class="bi bi-arrow-right"></i></a>
+                                <button class="btn btn-light"
+                                    type="button"
+                                    id="triggerId"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item text-success" href="#"><i class="bi bi-check-lg" style="font-size: 1rem;"></i> Mark as read</button>
+                                    <button class="dropdown-item text-danger" href="#"><i class="bi bi-x-lg" style="font-size: 1rem;"></i> Remove notifications</button>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="card-body p-0">
+                        <div class=""><span class="fw-bold">Username</span> replied your thread</div>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-card d-flex flex-row">
+                <div class="notification-category">
+                    <i class="bi bi-person-plus-fill" style="font-size: 2em; color: #000000;"></i>
+                </div>
+                <div class="card-content border border-0">
+                    <div class="card-header border-0 bg-white border-black rounded-0 p-0 " > 
+                        <div class="username-date d-flex justify-content-between">
+                            <span>
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                                
+                            </span>
+                            <div class="dropdown open">
+                                <button class="btn btn-light"
+                                    type="button"
+                                    id="triggerId"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item text-success" href="#"><i class="bi bi-check-lg" style="font-size: 1rem;"></i> Mark as read</button>
+                                    <button class="dropdown-item text-danger" href="#"><i class="bi bi-x-lg" style="font-size: 1rem;"></i> Remove notifications</button>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="card-body p-0">
+                        <div class=""><span class="fw-bold">Username</span> and others followed you</div>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-card d-flex flex-row">
+                <div class="notification-category">
+                    <i class="bi bi-heart-fill" style="font-size: 2em; color: #000000;"></i>
+                </div>
+                <div class="card-content border border-0">
+                    <div class="card-header border-0 bg-white border-black rounded-0 p-0 " > 
+                        <div class="username-date d-flex justify-content-between">
+                            <span>
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                            </span>
+                            <div class="dropdown open">
+                                <a class="btn btn-light" href="/thread"><i class="bi bi-arrow-right"></i></a>
+                                <button class="btn btn-light"
+                                    type="button"
+                                    id="triggerId"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item text-success" href="#"><i class="bi bi-check-lg" style="font-size: 1rem;"></i> Mark as read</button>
+                                    <button class="dropdown-item text-danger" href="#"><i class="bi bi-x-lg" style="font-size: 1rem;"></i> Remove notifications</button>
+                                </div>
+                            </div>
+                            
+                        </div> 
+                    </div>
+                    <div class="card-body p-0">
+                        <div class=""><span class="fw-bold">Username</span> liked your thread</div>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-card d-flex flex-row">
+                <div class="notification-category">
+                    <i class="bi bi-heart-fill" style="font-size: 2em; color: #000000;"></i>
+                </div>
+                <div class="card-content border border-0">
+                    <div class="card-header border-0 bg-white border-black rounded-0 p-0 " > 
+                        <div class="username-date d-flex justify-content-between">
+                            <span>
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                            </span>
+                            <div class="dropdown open">
+                                <a class="btn btn-light" href="/thread"><i class="bi bi-arrow-right"></i></a>
+                                <button class="btn btn-light"
+                                    type="button"
+                                    id="triggerId"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item text-success" href="#"><i class="bi bi-check-lg" style="font-size: 1rem;"></i> Mark as read</button>
+                                    <button class="dropdown-item text-danger" href="#"><i class="bi bi-x-lg" style="font-size: 1rem;"></i> Remove notifications</button>
+                                </div>
+                            </div>
+                            
+                        </div> 
+                    </div>
+                    <div class="card-body p-0">
+                        <div class=""><span class="fw-bold">Username</span> liked your thread</div>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-card d-flex flex-row">
+                <div class="notification-category">
+                    <i class="bi bi-chat" style="font-size: 2em; color: #000000;"></i>
+                </div>
+                <div class="card-content border border-0">
+                    <div class="card-header border-0 bg-white border-black rounded-0 p-0 " > 
+                        <div class="username-date d-flex justify-content-between">
+                            <span>
+                            <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                            </span>
+                            <div class="dropdown open">
+                                <a class="btn btn-light" href="/thread"><i class="bi bi-arrow-right"></i></a>
+                                <button class="btn btn-light"
+                                    type="button"
+                                    id="triggerId"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item text-success" href="#"><i class="bi bi-check-lg" style="font-size: 1rem;"></i> Mark as read</button>
+                                    <button class="dropdown-item text-danger" href="#"><i class="bi bi-x-lg" style="font-size: 1rem;"></i> Remove notifications</button>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="card-body p-0">
+                        <div class=""><span class="fw-bold">Username</span> replied your thread</div>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-card d-flex flex-row">
+                <div class="notification-category">
+                    <i class="bi bi-person-plus-fill" style="font-size: 2em; color: #000000;"></i>
+                </div>
+                <div class="card-content border border-0">
+                    <div class="card-header border-0 bg-white border-black rounded-0 p-0 " > 
+                        <div class="username-date d-flex justify-content-between">
+                            <span>
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                                
+                            </span>
+                            <div class="dropdown open">
+                                <button class="btn btn-light"
+                                    type="button"
+                                    id="triggerId"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item text-success" href="#"><i class="bi bi-check-lg" style="font-size: 1rem;"></i> Mark as read</button>
+                                    <button class="dropdown-item text-danger" href="#"><i class="bi bi-x-lg" style="font-size: 1rem;"></i> Remove notifications</button>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="card-body p-0">
+                        <div class=""><span class="fw-bold">Username</span> and others followed you</div>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-card d-flex flex-row">
+                <div class="notification-category">
+                    <i class="bi bi-chat" style="font-size: 2em; color: #000000;"></i>
+                </div>
+                <div class="card-content border border-0">
+                    <div class="card-header border-0 bg-white border-black rounded-0 p-0 " > 
+                        <div class="username-date d-flex justify-content-between">
+                            <span>
+                            <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                            </span>
+                            <div class="dropdown open">
+                                <a class="btn btn-light" href="/thread"><i class="bi bi-arrow-right"></i></a>
+                                <button class="btn btn-light"
+                                    type="button"
+                                    id="triggerId"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item text-success" href="#"><i class="bi bi-check-lg" style="font-size: 1rem;"></i> Mark as read</button>
+                                    <button class="dropdown-item text-danger" href="#"><i class="bi bi-x-lg" style="font-size: 1rem;"></i> Remove notifications</button>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="card-body p-0">
+                        <div class=""><span class="fw-bold">Username</span> replied your thread</div>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-card d-flex flex-row">
+                <div class="notification-category">
+                    <i class="bi bi-heart-fill" style="font-size: 2em; color: #000000;"></i>
+                </div>
+                <div class="card-content border border-0">
+                    <div class="card-header border-0 bg-white border-black rounded-0 p-0 " > 
+                        <div class="username-date d-flex justify-content-between">
+                            <span>
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                            </span>
+                            <div class="dropdown open">
+                                <a class="btn btn-light" href="/thread"><i class="bi bi-arrow-right"></i></a>
+                                <button class="btn btn-light"
+                                    type="button"
+                                    id="triggerId"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item text-success" href="#"><i class="bi bi-check-lg" style="font-size: 1rem;"></i> Mark as read</button>
+                                    <button class="dropdown-item text-danger" href="#"><i class="bi bi-x-lg" style="font-size: 1rem;"></i> Remove notifications</button>
+                                </div>
+                            </div>
+                            
+                        </div> 
+                    </div>
+                    <div class="card-body p-0">
+                        <div class=""><span class="fw-bold">Username</span> liked your thread</div>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-card d-flex flex-row">
+                <div class="notification-category">
+                    <i class="bi bi-person-plus-fill" style="font-size: 2em; color: #000000;"></i>
+                </div>
+                <div class="card-content border border-0">
+                    <div class="card-header border-0 bg-white border-black rounded-0 p-0 " > 
+                        <div class="username-date d-flex justify-content-between">
+                            <span>
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                                
+                            </span>
+                            <div class="dropdown open">
+                                <button class="btn btn-light"
+                                    type="button"
+                                    id="triggerId"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="triggerId">
+                                    <button class="dropdown-item text-success" href="#"><i class="bi bi-check-lg" style="font-size: 1rem;"></i> Mark as read</button>
+                                    <button class="dropdown-item text-danger" href="#"><i class="bi bi-x-lg" style="font-size: 1rem;"></i> Remove notifications</button>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="card-body p-0">
+                        <div class=""><span class="fw-bold">Username</span> and others followed you</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modals -->
+        <!--  Modal trigger button  -->
+        
+        
+        <!-- Modal Body-->
+        <div
+        class="modal fade"
+        id="postThread"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="modalTitleId"
+        aria-hidden="true"
+        >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">
+                        Creating thread
+                    </h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="d-flex flex-row" >
+                            <div class="avatar-and-follow-icon">
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                            </div>
+                            <div class="card-content border border-0 d-flex flex-column justify-content-between w-100 px-2">
+                                <p class="fw-bold d-inline-block my-1">Username</p>
+
+                                <textarea name="thread-body" placeholder="Needle your thread here..."  id="create-thread-body" maxlength="1000"></textarea>
+                                
+                                <div class="image-card">
+                                    <img id="create-thread-body-image" src="" alt="" >
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div>
+                            <label for="thread-image"><i class="bi bi-image-fill fs-5 me-2"></i>Upload an image</label>
+                            <input id="thread-image" class="d-none" type="file" accept="image/png, image/jpeg">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-outline-dark"
+                        data-bs-dismiss="modal"
+                        onclick="clearThreadForm()"
+                    >
+                        Close
+                    </button>
+                    <button type="button" id="liveToastBtn" data-bs-dismiss="modal" onclick="closeModalAndTriggerToast(event)" class="btn btn-dark">Post</button>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div
+        class="modal fade"
+        id="replyThread"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="modalTitleId"
+        aria-hidden="true"
+        >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">
+                        Replying a thread
+                    </h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="d-flex flex-row" >
+                            <div class="avatar-is-replied">
+                                <div class="avatar-and-follow-icon ">
+                                    <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                                    <i class="follow-icon-avatar bi bi-plus-circle" ></i>    
+                                </div>
+                                <div class="vertical-reply-bar"></div>
+                            </div>
+                            
+                            <div class="card-content border border-0 px-2">
+                                <div class="card-header border-0 bg-white border-black rounded-0 p-0 " > 
+                                    <div class="username-date d-flex justify-content-between">
+                                        <span>
+                                            <p class="fw-bold d-inline-block my-0">Username</p>
+                                            <i class="bi bi-clock"></i>
+                                            <span>dd/mm/yyyy</span>
+                                        </span>
+                                        <!-- <i class="bi bi-three-dots"></i> -->
+                                    </div> 
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, nulla?</div>
+                                    <div class="overflow-hidden rounded-2 border border-1 border-dark" style="margin-top: 8px; display: none;">
+                                        <img src="" alt="Image of thread" style="width: 100%;">
+                                    </div>
+                                </div>
+        
+                                <!-- <div class="card-footer bg-white border-top-0">
+                                    <p class="d-inline-block"><i class="bi bi-chat-left-text"></i> Replies</p>
+                                    <p class="d-inline-block"><i class="bi bi-heart"></i> Likes</p>
+                                </div> -->
+                            </div>
+                            
+                        </div>
+                        <div class="d-flex flex-row" >
+                            <div class="avatar-and-follow-icon">
+                                <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
+                            </div>
+                            <div class="card-content border border-0 d-flex flex-column justify-content-between w-100 px-2">
+                                <p class="fw-bold d-inline-block my-1">Username <span class="text-primary fw-medium">replying @username</span></p>
+                                
+                                <textarea name="thread-body" placeholder="Replying..."  id="reply-thread-body" maxlength="1000"></textarea>
+                                
+                                <div class="image-card">
+                                    <img id="create-thread-body-image" src="" alt="" >
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <!-- <div>
+                            <label for="thread-image"><i class="bi bi-image-fill fs-5 me-2"></i>Upload an image</label>
+                            <input id="thread-image" class="d-none" type="file" accept="image/png, image/jpeg">
+                            
+                        </div> -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-outline-dark"
+                        data-bs-dismiss="modal"
+                        onclick="clearThreadForm()"
+                    >
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-dark">Post</button>
+                </div>
+            </div>
+        </div>
+        </div>

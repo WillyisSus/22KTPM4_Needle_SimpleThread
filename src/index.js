@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const expressHbs = require('express-handlebars');
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 
 // cấu hình giao thức
 console.log(__dirname)
@@ -25,7 +27,12 @@ app.engine('hbs', expressHbs.engine({
     }
 }));
 
+//cau hinh cookie
+// app.use(cookieParser(process.env.COOKIE_SECRET || "keyboard cat"));
 
+//cau hinh session
+// app.use(session({
+//     secret: process.env.SESSION_SECRET
 
 
 app.set("view engine", "hbs");
@@ -40,3 +47,5 @@ app.get("/greetings", (req, res) => res.render("index", { layout: "logged-out-la
 app.get("/login", (req, res) => res.render("login", { layout: "logged-out-layout" }));
 app.get("/signup", (req, res) => res.render("signup", { layout: "logged-out-layout" }));
 app.get("/forgot-password", (req, res) => res.render("forgotpw", { layout: "logged-out-layout" }));
+app.get("/notifications", (req, res) => res.render("notifications"));
+app.get("/thread", (req, res) => res.render("thread"));
