@@ -121,7 +121,7 @@
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="/thread/post" method="POST" >
+                    <form  id="postThreadForm" onsubmit="sendPostThreadData(event)" >
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalTitleId">
                                 Creating thread
@@ -152,7 +152,7 @@
                                 <div>
                                     <label for="thread-image"><i class="bi bi-image-fill fs-5 me-2"></i>Upload an
                                         image</label>
-                                    <input id="thread-image" name="thread_image" class="d-none" type="file" accept="image/png, image/jpeg">
+                                    <input id="thread-image" name="thread-image" class="d-none" type="file" accept="image/png, image/jpeg">
 
                                 </div>
                             </div>

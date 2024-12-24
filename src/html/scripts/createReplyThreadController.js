@@ -73,3 +73,25 @@ function closeModalAndTriggerToast(e){
     }, 1500)
 }
 
+async function sendPostThreadData(event){
+    event.preventDefault();
+    try {
+        const formData = new FormData();
+        const text =  document.getElementById("create-thread-body")
+        const file = document.getElementById("thread-image")
+        formData.append('file', file.files[0])
+        clearThreadForm();
+        console.log(formData)
+        const res =  await fetch('http://4.217.254.66:8000/upload', {
+            method: 'post',
+            body: formData}
+        )
+        if (res.status == 201){
+            console.log(res.json())
+        }
+    } catch (error) {
+        console.log(error);
+
+    }
+    
+}
