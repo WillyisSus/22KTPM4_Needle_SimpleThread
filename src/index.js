@@ -36,3 +36,7 @@ app.get("/home-feed", (req, res) => res.render("home-feed"));
 app.get("/for-you-page", (req, res) => res.render("for-you-page"));
 app.get("/cur-profile", (req, res) => res.render("cur-profile"));
 app.get("/profile", (req, res) => res.render("profile"));
+app.get("/greetings", (req, res) => res.render("index", { layout: "logged-out-layout" }));
+app.get("/login", (req, res) => res.render("login", { layout: "logged-out-layout" }));
+app.get("/signup", (req, res) => res.render("signup", { layout: "logged-out-layout" }));
+app.get("/forgot-password", (req, res) => res.render("forgotpw", { layout: "logged-out-layout" }));
