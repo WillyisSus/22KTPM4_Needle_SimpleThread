@@ -8,7 +8,7 @@ const port = 3000;
 const expressHbs = require('express-handlebars');
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const user = []
 
 // cấu hình giao thức
