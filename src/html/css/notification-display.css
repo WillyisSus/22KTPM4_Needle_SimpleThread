@@ -28,7 +28,7 @@
     
 }
 
-#thread-display-section .dropdown{
+#thread-display-section div .dropdown{
     padding: 0; 
     font-size: 20px;
     width: fit-content;
@@ -144,7 +144,7 @@ div.notification-card.d-flex.flex-row{
         height: fit-content;
         margin: 0;
         z-index: 1;
-        /* display: none; */
+        /*display: none;*/
     }
     #thread-display-section .on-active-page{
         color: #000000;
