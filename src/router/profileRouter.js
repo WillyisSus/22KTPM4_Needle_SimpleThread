@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const controller = require("../controllers/profileController.js");
+const controller = require("../controller/profileController.js");
 
 router.get("/:username", controller.show);
 router.post("/follow/:username", controller.follow);

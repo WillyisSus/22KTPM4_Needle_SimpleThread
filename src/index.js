@@ -55,8 +55,8 @@ app.get("/home-feed", (req, res) => {
 });
 app.get("/for-you-page", (req, res) => res.render("for-you-page"));
 
-app.use("/cur-profile", require("./routes/curProfileRouter"));
-app.use("/profile", require("./routes/profileRouter.js"));
+app.use("/cur-profile", require("./router/curProfileRouter.js"));
+app.use("/profile", require("./router/profileRouter.js"));
 app.get("/greetings", (req, res) => res.render("index", { layout: "logged-out-layout" }));
 //app.get("/login", (req, res) => res.render("login", { layout: "logged-out-layout" }));
 //app.get("/signup", (req, res) => res.render("signup", { layout: "logged-out-layout" }));

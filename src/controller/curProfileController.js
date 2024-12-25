@@ -5,12 +5,8 @@ const controller = {};
 
 controller.show = async (req, res) => {
     try {
-        req.session = {
-            user: {
-                user_id: 1,
-            }
-        }
-        const user = await models.User.findByPk(req.session.user.user_id);
+        const user_id = await req.user;
+        const user = await models.User.findByPk(user_id);
 
         const nFollowers = await models.FollowingFollower.count({
             where: {
@@ -60,12 +56,8 @@ controller.show = async (req, res) => {
 
 controller.put = async (req, res) => {
     try {
-        req.session = {
-            user: {
-                user_id: 1,
-            }
-        }
-        const user = await models.User.findByPk(req.session.user.user_id);
+        const user_id = await req.user;
+        const user = await models.User.findByPk(user_id);
 
         const { display_name, bio, avatar } = req.body;
 
@@ -99,18 +91,13 @@ controller.put = async (req, res) => {
 
 controller.deleteAvatar = async (req, res) => {
     try {
-        req.session = {
-            user: {
-                user_id: 1,
-            }
-        }
-        const user = await models.User.findByPk(req.session.user.user_id);
+        const user_id = await req.user;
 
         await models.User.update({
             avatar: "/images/avatar.png"
         }, {
             where: {
-                user_id: user.user_id
+                user_id
             }
         });
         res.status(200).send("Avatar deleted");

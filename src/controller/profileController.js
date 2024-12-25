@@ -5,11 +5,7 @@ const controller = {};
 
 controller.show = async (req, res) => {
     try {
-        req.session = {
-            user: {
-                user_id: 1,
-            }
-        }
+        const session_user_id = await req.user;
         const user = await models.User.findOne({
             where: {
                 username: req.params.username
@@ -25,7 +21,7 @@ controller.show = async (req, res) => {
         const isFollowing = await models.FollowingFollower.findOne({
             where: {
                 followee_id: user.user_id,
-                follower_id: req.session.user.user_id
+                follower_id: session_user_id
             }
         });
 
@@ -43,11 +39,7 @@ controller.show = async (req, res) => {
 
 controller.follow = async (req, res) => {
     try {
-        req.session = {
-            user: {
-                user_id: 1,
-            }
-        }
+        const session_user_id = await req.user;
         const user = await models.User.findOne({
             where: {
                 username: req.params.username
@@ -55,7 +47,7 @@ controller.follow = async (req, res) => {
         });
 
         const followee_id = user.user_id;
-        const follower_id = req.session.user.user_id;
+        const follower_id = session_user_id;
 
         const notif_status = await models.NotificationStatus.create({
             status_name: "unread"
@@ -78,11 +70,8 @@ controller.follow = async (req, res) => {
 
 controller.unfollow = async (req, res) => {
     try {
-        req.session = {
-            user: {
-                user_id: 1,
-            }
-        }
+        const session_user_id = await req.user;
+
         const user = await models.User.findOne({
             where: {
                 username: req.params.username
@@ -90,7 +79,7 @@ controller.unfollow = async (req, res) => {
         });
 
         const followee_id = user.user_id;
-        const follower_id = req.session.user.user_id;
+        const follower_id = session_user_id;
 
         await sequelize.transaction(async () => {
             const notif_status_id = await models.FollowingFollower.findOne({
