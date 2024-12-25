@@ -50,7 +50,7 @@ controller.follow = async (req, res) => {
         const follower_id = session_user_id;
 
         const notif_status = await models.NotificationStatus.create({
-            status_name: "unread"
+            status_name: "new"
         });
 
         await models.FollowingFollower.create({

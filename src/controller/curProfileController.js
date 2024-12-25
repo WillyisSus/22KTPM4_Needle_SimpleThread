@@ -32,7 +32,6 @@ controller.show = async (req, res) => {
                 as: "follower",
 
             },
-            raw: true
         });
 
         res.locals.followings = await models.FollowingFollower.findAll({

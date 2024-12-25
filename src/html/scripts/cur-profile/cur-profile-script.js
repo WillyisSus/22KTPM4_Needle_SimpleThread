@@ -12,11 +12,13 @@ let followingEl = document.getElementById('followingCol');
 
         el.style.fontWeight = 'bold';
         if (el === followingEl) {
-            followingEl.style.fontWeight = 'normal';
+            console.log('following');
+            followersEl.style.fontWeight = 'normal';
             if (!followerModalBody.classList.contains('d-none')) followerModalBody.classList.add('d-none');
             followingModalBody.classList.remove('d-none');
         } else {
-            followersEl.style.fontWeight = 'normal';
+            console.log('followers');
+            followingEl.style.fontWeight = 'normal';
             followerModalBody.classList.remove('d-none');
             if (!followingModalBody.classList.contains('d-none')) followingModalBody.classList.add('d-none');
         }
@@ -78,35 +80,41 @@ function removeAvatar() {
     }
 }
 
-function saveAvatarChange() {
-    const FILE_STORAGE_URL = "http://4.217.254.66:8000";
-    const file = document.getElementById('pickedPicture').files[0];
-    if (file) {
-        let formData = new FormData();
+async function saveAvatarChange() {
+    try {
 
-        formData.append("file", file);
-        fetch(FILE_STORAGE_URL + '/upload', { method: "POST", body: formData })
-            .then(response => response.json())
-            .then(data => {
-                const url = FILE_STORAGE_URL + data.path;
-                fetch("/cur-profile", {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ avatar: url }),
-                }).then((res) => {
-                    if (res.status === 200) {
-                        return window.location.reload();
-                    }
-                    throw new Error("Internal server error");
-                }).catch((error) => {
-                    console.error(error);
-                });
-            })
-            .catch(error => {
-                console.error(error);
+        const FILE_STORAGE_URL = "http://4.217.254.66:8000";
+        const file = document.getElementById('pickedPicture').files[0];
+        if (file) {
+            let formData = new FormData();
+            formData.append("file", file);
+            const response = await fetch(FILE_STORAGE_URL + '/upload', { method: "POST", body: formData });
+            if (response.status !== 200) {
+                throw new Error(await response.text());
+            }
+            const data = response.json();
+
+
+            const url = FILE_STORAGE_URL + data.path;
+
+            const res = await fetch("/cur-profile", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ avatar: url })
             });
+
+
+            if (res.status === 200) {
+                return window.location.reload();
+            }
+            throw new Error(await res.text());
+
+        }
+    } catch (error) {
+        document.getElementById('saveAvatarError').innerText = error.message;
+
     }
 }
 

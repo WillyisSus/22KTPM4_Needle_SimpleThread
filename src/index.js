@@ -11,6 +11,8 @@ const cors = require('cors')
 const session = require("express-session");
 const flash = require('express-flash');
 const passport = require('passport');
+const xssClean = require('xss-clean');
+//const helmet = require('helmet');
 
 // cấu hình giao thức
 console.log(__dirname)
@@ -35,13 +37,14 @@ app.engine('hbs', expressHbs.engine({
 }));
 
 app.use(express.json());
+app.use(xssClean());
 app.use(express.urlencoded({ extended: false }));
 app.use(flash())
 app.use(session({
     secret: process.env.SESSION_SECRET || "keyboard cat",
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 86400000 } 
+    cookie: { maxAge: 86400000 }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
