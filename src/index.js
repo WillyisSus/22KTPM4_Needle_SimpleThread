@@ -12,6 +12,7 @@ const passport = require('passport');
 
 // cấu hình giao thức
 console.log(__dirname)
+console.log(process.env.APP_EMAIL)
 app.use(express.static(__dirname + "/html"));
 app.use(cors({ origin: ["http://4.217.254.66:8000"] }));
 app.engine('hbs', expressHbs.engine({
