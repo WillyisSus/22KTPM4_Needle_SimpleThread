@@ -3,7 +3,9 @@ const models = require('../models')
 const {where} = require('sequelize');
 
 controller.postNewThread = async (req, res) => {
-    const {  text,picture,created_at,creator,parent_thread,comment_notif_status} = req.body
+    let user = await req.user;
+    console.log(user);
+    const { text,picture,created_at,creator,parent_thread,comment_notif_status} = req.body
     console.log(text)
     try {
         await models.Thread.create({
