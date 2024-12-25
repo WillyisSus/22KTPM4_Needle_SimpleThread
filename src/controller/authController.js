@@ -4,7 +4,7 @@ const models = require('../models');
 const bcrypt = require('bcrypt')
 const passport = require('passport');
 const initializePassport = require('../passport-config');
-const {Op} = require('@sequelize/core')
+const { Op } = require('@sequelize/core')
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken')
 
@@ -32,15 +32,15 @@ controller.getSignup = async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.Password, 10);
         const usernameInDB = await models.User.findOne({
-            where: {username: req.body.Username}
+            where: { username: req.body.Username }
         })
-        if (usernameInDB != null){
+        if (usernameInDB != null) {
             return res.render("signup", { layout: "logged-out-layout", message: "Username has been used" });
         }
         const emailInDB = await models.User.findOne({
-            where: {email: req.body.Email}
+            where: { email: req.body.Email }
         })
-        if (emailInDB != null){
+        if (emailInDB != null) {
             return res.render("signup", { layout: "logged-out-layout", message: "Email has been used" });
         }
         // await models.User.create({
@@ -81,10 +81,11 @@ controller.getLogin = (req, res, next) => {
     })(req, res, next);
 }
 
+
 controller.handleError = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        let message  = "";
+        let message = "";
         errors.array().forEach(error => {
             message += error.msg + "<br>";
         });

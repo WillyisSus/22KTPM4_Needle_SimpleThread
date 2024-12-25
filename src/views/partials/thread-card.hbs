@@ -1,6 +1,6 @@
 <div class="thread-card d-flex flex-row">
     <div class="avatar-and-follow-icon">
-        <a href="/profile">
+        <a href="/profile/{{username}}">
             <img src="/images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle"
                 style="width: 36px; height:36px;">
         </a>
@@ -32,5 +32,45 @@
             <p class="d-inline-block"><i class="bi bi-heart"></i> Likes</p>
         </div>
     </div>
+
+    <div class="modal fade" id="followPopup" tabindex="-1" role="dialog" aria-labelledby="followPopup"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="followPopupId">
+                        Follow a user
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid d-grid">
+                        <div class="row">
+                            <div class="col-9">
+                                <h4>Displayname</h4>
+                                <h6 class="fw-light">@username</h6>
+                                <p class="w-100 px-2">bio</p>
+                            </div>
+                            <div class="col-3">
+                                <img src="/images/avatar.png" alt="user-avatar"
+                                    class=" border border-1 border-dark rounded-circle w-100">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p class="py-2">9,999 followers</p>
+                            <button class="btn btn-dark" onclick="changeFollowStatus(event)">follow
+                                @username</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
