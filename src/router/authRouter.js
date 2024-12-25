@@ -5,6 +5,7 @@ const {body} = require('express-validator');
 router.get("/signup", controller.showSignup);
 router.get("/login", controller.showLogin);
 router.get("/forgot-password", controller.showForgot);
+router.get("/verify-email", controller.showVerifyEmail);
 
 router.post("/signup",
     body("Username").matches(/^[a-zA-Z0-9]{6,32}$/, "i").withMessage("Username must be between 6 to 32 characters and contain only letters and numbers."),
@@ -13,6 +14,6 @@ router.post("/signup",
     controller.handleError, controller.getSignup);
 
 router.post("/login", controller.getLogin);
-
+router.get("/verify-email/:crypted", controller.verifyEmail)
 // router.post("/forgot-password", controller.getForgotPassword);
 module.exports = router;

@@ -14,6 +14,7 @@ const xssClean = require('xss-clean');
 
 // cấu hình giao thức
 console.log(__dirname)
+console.log(process.env.APP_EMAIL)
 app.use(express.static(__dirname + "/html"));
 app.engine('hbs', expressHbs.engine({
     layoutsDir: __dirname + "/views/layouts",
