@@ -29,6 +29,7 @@ function initialize(passport) {
     passport.use(new LocalStategy({ usernameField: 'Email', passwordField: 'Password'}, authenticateUser))
     passport.serializeUser((user, done) => done(null, user.user_id))
     passport.deserializeUser((user_id, done) => {
+        console.log(user_id)
         return done(null, user_id)
     })
 }

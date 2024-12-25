@@ -53,7 +53,7 @@ controller.getSignup = async (req, res) => {
 controller.getLogin = (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/',
-        failureRedirect: '/auth/signup',
+        failureRedirect: '/auth/login',
         failureFlash: true
     })(req, res, next);
 }
