@@ -2,7 +2,6 @@ require('dotenv').config();
 // const path = require('path');
 const express = require('express');
 const multer = require('multer')
-const upload = multer({dest: "images/"})
 const app = express();
 const port = 3000;
 const expressHbs = require('express-handlebars');
@@ -35,6 +34,8 @@ app.engine('hbs', expressHbs.engine({
     }
 }));
 
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(flash())
@@ -46,6 +47,9 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+
 
 app.set("view engine", "hbs");
 app.listen(port, () => console.log(`Example app listening on port ${port}`))
