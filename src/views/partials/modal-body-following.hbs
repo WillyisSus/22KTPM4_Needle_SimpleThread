@@ -1,12 +1,17 @@
 <div class="d-flex justify-content-between">
+    {{#with followee}}
     <div class="d-flex gap-2">
-        <img src="/images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle"
+        <img src="{{avatar}}" alt="avatar" class="border border-1 border-dark rounded-circle"
             style="width: 36px; height:36px;">
         <div class="d-flex flex-column">
-            <div><b>Display Name</b></div>
-            <div>Username</div>
+            <div><b>{{display_name}}</b></div>
+            <div>{{username}}</div>
         </div>
     </div>
 
-    <button type="button" class="btn btn-outline-dark col-3" onclick="followClicked(this)">Unfollow</button>
+    <button type="button" data-username="{{username}}" class="btn btn-outline-dark col-3"
+        onclick="followClicked(this)">Unfollow</button>
+
+    {{/with}}
+
 </div>
