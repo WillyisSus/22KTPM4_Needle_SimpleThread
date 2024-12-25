@@ -77,18 +77,39 @@ async function sendPostThreadData(event){
     event.preventDefault();
     try {
         const formData = new FormData();
-        const text =  document.getElementById("create-thread-body")
+        const text =  document.getElementById("create-thread-body").value
+        console.log(text)
         const file = document.getElementById("thread-image")
-        formData.append('file', file.files[0])
-        clearThreadForm();
-        console.log(formData)
-        const res =  await fetch('http://4.217.254.66:8000/upload', {
-            method: 'post',
-            body: formData}
-        )
-        if (res.status == 201){
-            console.log(res.json())
+        var filePath = null;
+        if (file.files[0]){
+            formData.append('file', file.files[0])
+            console.log(formData)
+            const res =  await fetch('http://4.217.254.66:8000/upload', {
+                method: 'POST',
+                body: formData}
+            ).then(data => data.json())
+            if (res.path){
+                filePath = res.path
+                console.log(filePath)
+            }
         }
+
+        const res = await fetch('/thread/post', {
+            method: 'POST',
+            headers: {
+                "Content-type":"application/json"
+              },
+            body: JSON.stringify({
+                text: text,
+                picture: filePath,
+                created_at: Date.now(),
+                creator: 1,
+                parent_thread: null,
+                comment_notif_status: null    
+            })
+        }).then(data => data.json())
+        console.log(res);
+        
     } catch (error) {
         console.log(error);
 

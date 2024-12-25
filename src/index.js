@@ -6,6 +6,7 @@ const upload = multer({dest: "images/"})
 const app = express();
 const port = 3000;
 const expressHbs = require('express-handlebars');
+const cors = require('cors')
 //const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const flash = require('express-flash');
@@ -14,6 +15,7 @@ const passport = require('passport');
 // cấu hình giao thức
 console.log(__dirname)
 app.use(express.static(__dirname + "/html"));
+app.use(cors({ origin: ["http://4.217.254.66:8000"] }));
 app.engine('hbs', expressHbs.engine({
     layoutsDir: __dirname + "/views/layouts",
     partialsDir: __dirname + "/views/partials",
