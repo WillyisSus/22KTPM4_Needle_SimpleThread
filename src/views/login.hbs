@@ -2,10 +2,10 @@
     <div class="container-fluid w-100" id="content">
         <div id="image-place">
             <img
-                src="./images/image_placeholder.jpg"
+                src="/images/image_placeholder.jpg"
                 class="img-fluid rounded-5"
                 id="Image"
-                alt="./images/image_placeholder.jpg"
+                alt="/images/image_placeholder.jpg"
             />
         </div>
         <div class="container" id="form-section">
@@ -13,7 +13,8 @@
             <br>
             <h5>Today is a new day. It's your day. You shape it. Sign in to start managing your threads.</h5>
             <br>
-            <form action="javascript:window.location.href='./home-feed.html'">
+            <p class="text-danger">{{{message}}}</p>
+            <form action="/auth/login" method="post">
                 <div class="mb-3 row">
                     <label
                         for="Email"
@@ -26,6 +27,7 @@
                             name="Email"
                             id="Email"
                             placeholder="abc@mail.com"
+                            required
                         />
                     </div>
                 </div>
@@ -42,8 +44,9 @@
                             id="Password"
                             aria-describedby="loginHelpId"
                             placeholder="At least 8 characters"
+                            required
                         />
-                        <small id="loginHelpId" class="form-text text-muted"><a class="text-decoration-none text-dark-emphasis" href="./forgetpw.html">Forgot Password?</a></small>
+                        <small id="loginHelpId" class="form-text text-muted"><a class="text-decoration-none text-dark-emphasis" href="/auth/forgot-password">Forgot Password?</a></small>
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -55,7 +58,7 @@
                 </div>
             </form>
             <br>
-            <p>Are you new to our site? <a href="/signup" class="text-decoration-none">Sign up</a></p>
+            <p>Are you new to our site? <a href="/auth/signup" class="text-decoration-none">Sign up</a></p>
         </div>                  
     </div>           
 </main>

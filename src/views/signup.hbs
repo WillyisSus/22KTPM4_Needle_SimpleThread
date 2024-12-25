@@ -2,10 +2,10 @@
     <div class="container-fluid w-100" id="content">
         <div id="image-place">
             <img
-                src="./images/image_placeholder.jpg"
+                src="/images/image_placeholder.jpg"
                 class="img-fluid rounded-5"
                 id="Image"
-                alt="./images/image_placeholder.jpg"
+                alt="/images/image_placeholder.jpg"
             />
         </div>
         <div class="container" id="form-section">
@@ -13,7 +13,8 @@
             <br>
             <h5>Today is a new day. It's your day. You shape it. Sign in to start managing your threads.</h5>
             <br>
-            <form action="javascript:window.location.href='./home-feed.html'">
+            <p class="text-danger">{{{message}}}</p>
+            <form action="/auth/signup" method="post">
                 <div class="mb-3 row">
                     <label
                         for="Username"
@@ -25,7 +26,7 @@
                             class="form-control"
                             name="Username"
                             id="Username"
-                            placeholder="Username123"
+                            placeholder="Username123"                            
                         />
                     </div>
                 </div>
@@ -40,7 +41,7 @@
                             class="form-control"
                             name="Email"
                             id="Email"
-                            placeholder="abc@mail.com"
+                            placeholder="abc@mail.com"                           
                         />
                     </div>
                 </div>
@@ -68,7 +69,7 @@
                 </div>
             </form>
             <br>
-            <p>Do you have an account? <a href="/login" class="text-decoration-none">Sign in</a></p>
+            <p>Do you have an account? <a href="/auth/login" class="text-decoration-none">Sign in</a></p>
         </div>                  
     </div>           
 </main>
