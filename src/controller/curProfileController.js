@@ -107,4 +107,63 @@ controller.deleteAvatar = async (req, res) => {
 
 };
 
+
+controller.getFollowers = async (req, res) => {
+    try {
+        const user_id = await req.user;
+        const user = await models.User.findByPk(user_id);
+        const page = req.query.page || 0;
+
+        followers = await models.FollowingFollower.findAll({
+            where: {
+                followee_id: user.user_id
+            },
+            include: {
+                model: models.User,
+                as: "follower",
+            },
+            offset: page * 20,
+            limit: 20,
+            raw: true,
+            attributes: [Sequelize.col("follower.display_name"), Sequelize.col("follower.username"), Sequelize.col("follower.avatar")]
+
+        });
+
+        res.status(200).json(followers);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server error");
+    }
+};
+
+controller.getFollowees = async (req, res) => {
+    try {
+        const user_id = await req.user;
+        const user = await models.User.findByPk(user_id);
+        const page = req.query.page || 0;
+
+        followees = await models.FollowingFollower.findAll({
+            where: {
+                follower_id: user.user_id
+            },
+            include: {
+                model: models.User,
+                as: "followee",
+            },
+            offset: page * 20,
+            limit: 20,
+            raw: true,
+            attributes: [Sequelize.col("followee.display_name"), Sequelize.col("followee.username"), Sequelize.col("followee.avatar")]
+        });
+
+        res.status(200).json(followees);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server error");
+    }
+};
+
+
 module.exports = controller;
