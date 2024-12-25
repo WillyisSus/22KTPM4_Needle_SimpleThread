@@ -1,7 +1,6 @@
 require('dotenv').config();
 // const path = require('path');
 const express = require('express');
-const multer = require('multer')
 const app = express();
 const port = 3000;
 const expressHbs = require('express-handlebars');

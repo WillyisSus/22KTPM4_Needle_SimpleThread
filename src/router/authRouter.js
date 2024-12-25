@@ -14,5 +14,5 @@ router.post("/signup",
 
 router.post("/login", controller.getLogin);
 
-router.post("/forgot-password", controller.getForgotPassword);
+// router.post("/forgot-password", controller.getForgotPassword);
 module.exports = router;
