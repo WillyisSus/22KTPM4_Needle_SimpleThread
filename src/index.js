@@ -1,6 +1,8 @@
 require('dotenv').config();
 // const path = require('path');
 const express = require('express');
+const multer = require('multer')
+const upload = multer({dest: "images/"})
 const app = express();
 const port = 3000;
 const expressHbs = require('express-handlebars');
@@ -44,7 +46,7 @@ app.use(passport.session());
 
 app.set("view engine", "hbs");
 app.listen(port, () => console.log(`Example app listening on port ${port}`))
-// app.use("/thread", require('./router/threadRouter'))
+app.use("/thread", require('./router/threadRouter'))
 app.get("/", (req, res) => res.render("home-feed"));
 app.get("/home-feed", (req, res) => res.render("home-feed"));
 app.get("/for-you-page", (req, res) => res.render("for-you-page"));
