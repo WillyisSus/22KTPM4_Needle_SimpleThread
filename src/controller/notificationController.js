@@ -69,15 +69,18 @@ controller.showNotif = async (req, res) => {
 
 controller.markRead = async (req, res) => {
     const notif_id = req.body.notif_id;
-    console.log(notif_id);
-    await models.NotificationStatus.update(
-        {status_name: "seen"},
-        {where: {status_id: notif_id}}
-    );
+    let status = await models.NotificationStatus.findOne({
+        where: {status_id: notif_id}
+    });
+    if (status.status_name === "new") {
+        await models.NotificationStatus.update(
+            {status_name: "seen"},
+            {where: {status_id: notif_id}}
+        );
+    }
 }
 controller.markDel = async (req, res) => {
     const notif_id = req.body.notif_id;
-    console.log(notif_id);
     await models.NotificationStatus.update(
         {status_name: "deleted"},
         {where: {status_id: notif_id}}
