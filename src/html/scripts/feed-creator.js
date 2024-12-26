@@ -43,7 +43,7 @@ async function upgradeToFeedControl(container, url, options, renderPostContent) 
 }
 
 function threadPostContent(post) {
-    const { thread_id, text, picture, created_at, nfollowers, nreplies, nlikes, is_following, display_name, username, avatar } = post;
+    const { thread_id, text, picture, created_at, nfollowers, nreplies, nlikes, is_following, display_name, username, avatar, have_liked } = post;
 
 
     return `
@@ -79,7 +79,7 @@ function threadPostContent(post) {
             <div class="card-footer bg-white border-top-0">
                 <p class="d-inline-block" data-bs-toggle="modal" data-bs-target="#replyThread"
                     onclick="getImageOfThread(event)"><i class="bi bi-chat-left-text"></i> ${nreplies} Replies</p>
-                <p class="d-inline-block" id="${"thread_id_" + thread_id}"><i class="bi bi-heart" onclick='like(${thread_id})'></i> ${nlikes} Likes</p>
+                <p class="d-inline-block" ><i class="bi ${have_liked ? "bi-heart-fill text-danger" : "bi-heart"}" onclick='like(${thread_id}, this)'></i> <span id="${"thread_id_" + thread_id}"> ${nlikes} Likes</span></p>
             </div>
         </div>
 

@@ -40,12 +40,24 @@ import('./feed-creator.js').then(({ upgradeToFeedControl, threadPostContent }) =
 
 });
 
-function like(thread_id) {
-    fetch(`/thread/like/${thread_id}`, { method: 'POST' })
-        .then(response => {
-            if (response.ok) {
-                let str = document.getElementById(`thread_id_${thread_id}`);
-                //
-            }
-        });
+async function like(thread_id, heart_btn) {
+    let el = document.getElementById(`thread_id_${thread_id}`);
+    let str = el.innerText.trim();
+    let nlikes = parseInt(str.split(" ")[0]);
+
+    const res = await fetch(`/thread/like/${thread_id}`, { method: 'POST' })
+    if (res.ok) {
+        el.innerText = `${nlikes + 1} Likes`;
+        heart_btn.classList.remove("bi-heart");
+        heart_btn.classList.add("bi-heart-fill");
+        heart_btn.classList.add("text-danger");
+        return;
+    }
+    await fetch(`/thread/like/${thread_id}`, { method: 'DELETE' });
+    el.innerText = `${nlikes - 1} Likes`;
+    heart_btn.classList.remove("bi-heart-fill");
+    heart_btn.classList.remove("text-danger");
+    heart_btn.classList.add("bi-heart");
+
+
 }

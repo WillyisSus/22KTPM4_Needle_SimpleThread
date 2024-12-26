@@ -11,5 +11,6 @@ router.post('/post', createController.postNewThread);
 router.post('/reply', createController.postThreadReply)
 router.post('/like/:thread_id', createController.like)
 
+router.delete('/like/:thread_id', createController.unlike)
 
 module.exports = router;
