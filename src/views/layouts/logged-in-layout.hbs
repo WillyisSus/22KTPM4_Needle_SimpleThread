@@ -136,13 +136,13 @@
                             <div class="container-fluid">
                                 <div class="d-flex flex-row">
                                     <div class="avatar-and-follow-icon">
-                                        <img src="/images/avatar.png" alt="avatar"
+                                        <img src="{{user.avatar}}" alt="avatar"
                                             class="border border-1 border-dark rounded-circle"
                                             style="width: 36px; height:36px;">
                                     </div>
                                     <div
                                         class="card-content border border-0 d-flex flex-column justify-content-between w-100 px-2">
-                                        <p class="fw-bold d-inline-block my-1">You are creating a thread</p>
+                                        <p class="fw-bold d-inline-block my-1">{{user.display_name}}</p>
 
                                         <textarea name="thread-body" placeholder="Needle your thread here..."
                                             id="create-thread-body" maxlength="1000"></textarea>

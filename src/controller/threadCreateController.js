@@ -181,7 +181,7 @@ controller.postNewThread = async (req, res) => {
     try {
         await models.Thread.create({
             text: text,
-            picture: process.env.IMAGE_SERVER + picture,
+            picture: (picture?process.env.IMAGE_SERVER:"") + picture,
             created_at: created_at,
             creator: user,
             parent_thread: parent_thread,

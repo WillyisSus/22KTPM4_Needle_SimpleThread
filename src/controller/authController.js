@@ -47,6 +47,7 @@ controller.getSignup = async (req, res) => {
             username: req.body.Username,
             display_name: req.body.Username,
             email: unverifiedEmail,
+            avatar: '/images/avatar.png',
             password: hashedPassword
         })
         console.log(process.env.CRYPTO_PASSWORD)
