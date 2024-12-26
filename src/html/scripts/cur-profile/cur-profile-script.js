@@ -1,6 +1,6 @@
 let followerModalBody = document.getElementById('followerModalBody');
 let followingModalBody = document.getElementById('followingModalBody');
-
+const FILE_STORAGE_URL = "http://4.217.254.66:8000";
 
 let followersEl = document.getElementById('followersCol');
 let followingEl = document.getElementById('followingCol');
@@ -83,7 +83,7 @@ function removeAvatar() {
 async function saveAvatarChange() {
     try {
 
-        const FILE_STORAGE_URL = "http://4.217.254.66:8000";
+
         const file = document.getElementById('pickedPicture').files[0];
         if (file) {
             let formData = new FormData();
@@ -92,8 +92,9 @@ async function saveAvatarChange() {
             if (response.status !== 200) {
                 throw new Error(await response.text());
             }
-            const data = response.json();
+            const data = await response.json();
 
+            console.log(data);
 
             const url = FILE_STORAGE_URL + data.path;
 

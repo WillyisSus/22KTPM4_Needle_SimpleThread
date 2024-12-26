@@ -1,7 +1,7 @@
 {
     "development": {
         "username": "postgres",
-        "password": "01082004",
+        "password": "986532",
         "database": "weeb_proj",
         "host": "127.0.0.1",
         "dialect": "postgres"

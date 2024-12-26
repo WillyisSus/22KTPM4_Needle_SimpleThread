@@ -18,7 +18,7 @@ controller.showLogin = (req, res) => {
     res.render("login", { layout: "logged-out-layout" });
 }
 controller.showForgot = (req, res) => {
-    res.render("forgotpw", { layout: "logged-out-layout", emailNotSent: true});
+    res.render("forgotpw", { layout: "logged-out-layout", emailNotSent: true });
 }
 
 controller.getSignup = async (req, res) => {
@@ -52,7 +52,7 @@ controller.getSignup = async (req, res) => {
         })
         console.log(process.env.CRYPTO_PASSWORD)
         const param = req.body.Email
-        const sign = jwt.sign({data: param}, process.env.CRYPTO_PASSWORD, {expiresIn: '5m'})
+        const sign = jwt.sign({ data: param }, process.env.CRYPTO_PASSWORD, { expiresIn: '5m' })
         const protocol = req.protocol;
         const host = req.hostname;
         const port = 3000;
@@ -98,23 +98,23 @@ controller.handleError = (req, res, next) => {
 
 controller.showVerifyEmail = (req, res, next) => {
     var query = req.query;
-    var isRequest =  (query.userRequest?query.userRequest:false);
-    return res.render('verifyemail', {layout: "logged-out-layout", message: "Please confirm your email to use email for login and password reset", userRequest: isRequest})
+    var isRequest = (query.userRequest ? query.userRequest : false);
+    return res.render('verifyemail', { layout: "logged-out-layout", message: "Please confirm your email to use email for login and password reset", userRequest: isRequest })
 }
 
 controller.sendVerifyEmail = async (req, res, next) => {
     var email = req.body;
     console.log(email)
     const user = await models.User.findOne({
-        where:{
+        where: {
             email: {
-                [Op.like]: email.Email + "%" 
+                [Op.like]: email.Email + "%"
             }
         }
     });
-    if (user){
-        if (user.email.search("%") != -1){
-            const sign = jwt.sign({data: email}, process.env.CRYPTO_PASSWORD, {expiresIn: '5m'})
+    if (user) {
+        if (user.email.search("%") != -1) {
+            const sign = jwt.sign({ data: email }, process.env.CRYPTO_PASSWORD, { expiresIn: '5m' })
             const protocol = req.protocol;
             const host = req.hostname;
             const port = 3000;
@@ -131,10 +131,10 @@ controller.sendVerifyEmail = async (req, res, next) => {
                             <a href="${fullUrl}">To Confirm Email</a></div>`,
             })
 
-            return res.render('verifyemail', {layout: "logged-out-layout", message: "Please check your email, this verification link will be expired after 5 minutes", userRequest: false})
+            return res.render('verifyemail', { layout: "logged-out-layout", message: "Please check your email, this verification link will be expired after 5 minutes", userRequest: false })
 
-        }else {
-            return res.render('verifyemail', {layout: "logged-out-layout", message: "Your email has already been verified, please return to login page", userRequest: false})
+        } else {
+            return res.render('verifyemail', { layout: "logged-out-layout", message: "Your email has already been verified, please return to login page", userRequest: false })
 
         }
 
@@ -143,68 +143,70 @@ controller.sendVerifyEmail = async (req, res, next) => {
 
 controller.verifyEmail = async (req, res) => {
     const params = req.params
-    var crypted = (params.crypted?params.crypted:"");
+    var crypted = (params.crypted ? params.crypted : "");
     var email;
-    if (crypted.length > 0){
-        jwt.verify(crypted, process.env.CRYPTO_PASSWORD,  function(err, decoded){
-            if (err){
-                return res.render('verifyemail', {layout: "logged-out-layout", message: "Email verification failed, the link is expired or bad token"})
-            }else{
+    if (crypted.length > 0) {
+        jwt.verify(crypted, process.env.CRYPTO_PASSWORD, function (err, decoded) {
+            if (err) {
+                return res.render('verifyemail', { layout: "logged-out-layout", message: "Email verification failed, the link is expired or bad token" })
+            } else {
                 email = decoded.data
             }
         })
-        if (email){
+        if (email) {
             try {
                 const user = await models.User.findOne({
                     where: {
-                        email:{
+                        email: {
                             [Op.like]: email + "%",
                         }
                     }
                 })
-                if (user){
+                if (user) {
                     await models.User.update(
                         {
                             email: email,
                         },
                         {
-                            where:{user_id: user.user_id}
+                            where: { user_id: user.user_id }
                         }
                     )
                 }
-                res.render('verifyemail', {layout: "logged-out-layout", message: "Your email is verified, you can use it to reset password and login now"})
+                res.render('verifyemail', { layout: "logged-out-layout", message: "Your email is verified, you can use it to reset password and login now" })
 
             } catch (error) {
                 console.log(error)
                 res.redirect('/auth/signup')
             }
-            
+
         }
-    }else {
+    } else {
         res.redirect('/auth/login')
     }
 }
 
 controller.sendForgotPasswordForm = async (req, res) => {
-    const {UsernameOrEmail = ""} = req.body;
+    const { UsernameOrEmail = "" } = req.body;
     var user;
-    if (UsernameOrEmail.length > 0){
-        if (UsernameOrEmail.search("@") != -1){
-            user = await models.User.findOne({ where: {
-                [Op.or]:{
-                    email: {
-                    [Op.like]: UsernameOrEmail + "%"
-                    },
-                    username: UsernameOrEmail
-                }}
-                
+    if (UsernameOrEmail.length > 0) {
+        if (UsernameOrEmail.search("@") != -1) {
+            user = await models.User.findOne({
+                where: {
+                    [Op.or]: {
+                        email: {
+                            [Op.like]: UsernameOrEmail + "%"
+                        },
+                        username: UsernameOrEmail
+                    }
+                }
+
             });
-            if (user){
-                if (user.email.search("%") != -1){
+            if (user) {
+                if (user.email.search("%") != -1) {
                     console.log("Not verify")
-                    res.render('forgotpw', {layout: "logged-out-layout", message: "Your email is not verified, please verify it first ", emailNotSent:true,})
-                }else{
-                    var sign = jwt.sign({data: user.email}, process.env.CRYPTO_PASSWORD, {expiresIn: '5m'})
+                    res.render('forgotpw', { layout: "logged-out-layout", message: "Your email is not verified, please verify it first ", emailNotSent: true, })
+                } else {
+                    var sign = jwt.sign({ data: user.email }, process.env.CRYPTO_PASSWORD, { expiresIn: '5m' })
                     const protocol = req.protocol;
                     const host = req.hostname;
                     const port = 3000;
@@ -220,71 +222,76 @@ controller.sendForgotPasswordForm = async (req, res) => {
                         html: `<div><span style="color:#FF0000">Please ignore this email if you did not request this.</span> Follow this link to reset your password, or it will be canceled after 5 minutes: 
                                     <a href="${fullUrl}">To reset your password</a></div>`,
                     })
-                    res.render('forgotpw', {layout: "logged-out-layout", emailNotSent: false})
+                    res.render('forgotpw', { layout: "logged-out-layout", emailNotSent: false })
                 }
-            }else{
-                return res.render('forgotpw', {layout: "logged-out-layout", emailNotSent:true, message: "Cannot find Username or Email"})
+            } else {
+                return res.render('forgotpw', { layout: "logged-out-layout", emailNotSent: true, message: "Cannot find Username or Email" })
             }
         } else {
-            user = await models.User.findOne({ where: 
-                { [Op.or]:
-                    {username: Email,
-                        email: Email
-                    }}});
+            user = await models.User.findOne({
+                where:
+                {
+                    [Op.or]:
+                {
+                    username: Email,
+                    email: Email
+                }
+                }
+            });
         }
     }
-    
+
 }
 
 controller.showRequestPasswordForm = async (req, res) => {
-    const {token = ""} = req.params;
+    const { token = "" } = req.params;
     var user;
-    if (token.length > 0){
-        jwt.verify(token, process.env.CRYPTO_PASSWORD,  function(err, decoded){
-            if (err){
-                return res.render('resetpassword', {layout: "logged-out-layout", expiredMessage: "The link is expired or bad token"})
-            }else{
-                return res.render('resetpassword', {layout: "logged-out-layout", actionTo: `/auth/reset-password/${token}`})
+    if (token.length > 0) {
+        jwt.verify(token, process.env.CRYPTO_PASSWORD, function (err, decoded) {
+            if (err) {
+                return res.render('resetpassword', { layout: "logged-out-layout", expiredMessage: "The link is expired or bad token" })
+            } else {
+                return res.render('resetpassword', { layout: "logged-out-layout", actionTo: `/auth/reset-password/${token}` })
             }
         })
-    }else{
-        return res.render('resetpassword', {layout: "logged-out-layout", expiredMessage: "The link is expired or bad token"})
+    } else {
+        return res.render('resetpassword', { layout: "logged-out-layout", expiredMessage: "The link is expired or bad token" })
     }
-    
+
 }
 
 controller.changeUserPassword = async (req, res) => {
-    const {token = ""} = req.params;
+    const { token = "" } = req.params;
     const body = req.body;
     console.log(body)
     var email;
-    if (token.length > 0){
-        jwt.verify(token, process.env.CRYPTO_PASSWORD,  function(err, decoded){
-            if (err){
+    if (token.length > 0) {
+        jwt.verify(token, process.env.CRYPTO_PASSWORD, function (err, decoded) {
+            if (err) {
                 return res.render('/auth/forgot-password/badtoken')
-            }else{
+            } else {
                 email = decoded.data;
             }
         })
-        if (email){
+        if (email) {
             try {
                 const hashedPassword = await bcrypt.hash(req.body.password, 10);
-                await models.User.update({password: hashedPassword}, {where: {email: email}})
-                res.redirect(200,'/auth/login')
+                await models.User.update({ password: hashedPassword }, { where: { email: email } })
+                res.redirect(200, '/auth/login')
             } catch (error) {
-                res.status(500).send("Something bad happened")   
+                res.status(500).send("Something bad happened")
             }
-        }  
-    }else{
-        return res.render('resetpassword', {layout: "logged-out-layout", expiredMessage: "The link is expired or bad token"})
+        }
+    } else {
+        return res.render('resetpassword', { layout: "logged-out-layout", expiredMessage: "The link is expired or bad token" })
     }
 }
 
 controller.logOutUser = (req, res) => {
-    req.logout(function(err) {
+    req.logout(function (err) {
         if (err) { return next(err); }
         res.redirect('/');
-      });
+    });
 
 }
 module.exports = controller;
