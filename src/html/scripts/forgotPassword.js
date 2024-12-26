@@ -12,7 +12,7 @@ async function sendPasswordResetBody(event) {
     confirmPassword = document.querySelector("#ConfirmPw").value;
     const action = form.action;
     const errorMessage = document.querySelector("#clientErrorMessage");
-    if (newPw == null || confirmPassword == null){
+    if (newPw == null || confirmPassword == null || newPw){
         errorMessage.innerHTML = "<span class=\"text-danger\">Please fill in all field</span>"
     }
     else if (newPw === confirmPassword){
