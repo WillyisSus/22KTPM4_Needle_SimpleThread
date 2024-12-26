@@ -58,7 +58,6 @@ app.listen(port, () => console.log(`Example app listening on port ${port}`))
 app.use("/thread", require('./router/threadRouter'))
 app.get("/", (req, res) => res.render("home-feed"));
 app.get("/home-feed", (req, res) => {
-    res.locals.threads = [{ username: "jenny" }, { username: "penny" }]
     res.render("home-feed")
 });
 app.get("/for-you-page", (req, res) => res.render("for-you-page"));
@@ -70,6 +69,9 @@ app.get("/greetings", (req, res) => res.render("index", { layout: "logged-out-la
 //app.get("/signup", (req, res) => res.render("signup", { layout: "logged-out-layout" }));
 //app.get("/forgot-password", (req, res) => res.render("forgotpw", { layout: "logged-out-layout" }));
 app.get("/notifications", (req, res) => res.render("notifications"));
-app.get("/thread", (req, res) => res.render("thread"));
+app.get("/thread/:thread_id", (req, res) => {
+    res.locals.thread_id = req.params.thread_id;
+    res.render("thread");
+});
 
 app.use("/auth", require('./router/authRouter'));
