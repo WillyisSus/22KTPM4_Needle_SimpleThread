@@ -188,8 +188,28 @@ controller.postNewThread = async (req, res) => {
     }
 }
 controller.postThreadReply = async (req, res) => {
+    const {text = "", parent_thread = -1} = req.body;
+    const user = await req.user;
     console.log(req.body)
-    res.render("home-feed")
+    try {
+        const notif_status = await models.NotificationStatus.create({
+            status_name: "new"
+        });
+        const reply = await models.Thread.create({
+            creator: user,
+            parent_thread: parent_thread,
+            text: text,
+            comment_notif_status: notif_status.status_id,
+        })
+        if (reply){
+            res.status(200).send("/thread/" + reply.thread_id);
+        }else{
+            res.status(500).send('Something bad happened')
+        }
+    } catch (error) {
+        res.status(500).send('Some thing bad happen')
+        
+    }
 }
 
 controller.like = async (req, res) => {
