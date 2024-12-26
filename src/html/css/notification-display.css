@@ -1,4 +1,4 @@
-.thread-container{
+.notification-thread-container{
     width: 100%;
     min-width: 390px;
     max-width: 624px;
@@ -12,12 +12,12 @@
     scroll-behavior: smooth;
 }
 
-.thread-container::-webkit-scrollbar{
+.notification-thread-container::-webkit-scrollbar{
     display: none;
     
 }
 
-#thread-display-section{
+#notification-thread-display-section{
     width: fit-content;
     margin: 0 auto;
     height: 100vh;
@@ -28,7 +28,7 @@
     
 }
 
-#thread-display-section div .dropdown{
+#notification-thread-display-section div .dropdown{
     padding: 0; 
     font-size: 20px;
     width: fit-content;
@@ -112,7 +112,7 @@ div.notification-card.d-flex.flex-row{
     min-width: 600px;
 }
 @media only screen and (max-width:760px){
-    .thread-container{
+    .notification-thread-container{
         width: 100%;
         max-width: 100%;
         min-width: 390px;
@@ -125,10 +125,10 @@ div.notification-card.d-flex.flex-row{
         scroll-behavior: smooth;
         margin: 0;
     }
-    .thread-container::-webkit-scrollbar{
+    .notification-thread-container::-webkit-scrollbar{
         display: none;
     }
-    #thread-display-section{
+    #notification-thread-display-section{
         width: 100vw;
         margin: 0 auto;
         height: calc(100vh - 48px - 68px);
@@ -138,7 +138,7 @@ div.notification-card.d-flex.flex-row{
         flex-direction: column;
         
     }
-    #thread-display-section .dropdown{
+    #notification-thread-display-section .dropdown{
         padding: 0;
         font-size: 20px;
         height: fit-content;
@@ -146,7 +146,7 @@ div.notification-card.d-flex.flex-row{
         z-index: 1;
         /*display: none;*/
     }
-    #thread-display-section .on-active-page{
+    #notification-thread-display-section .on-active-page{
         color: #000000;
         border-top: solid 1px #000000;
         border-bottom: solid 1px #000000;
