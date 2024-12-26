@@ -114,3 +114,33 @@ async function sendPostThreadData(event){
     }
     
 }
+
+async function postAThreadReply(event) {
+    event.preventDefault();
+    const form = event.target;
+    const repliedID = form.getAttribute('data-id');
+    var replyBody = "";
+    replyBody =  form.querySelector('#reply-thread-body').value
+    if (replyBody.length > 0){
+        try {
+            const res = await fetch('/thread/reply', {
+                method: 'post',
+                headers:{
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    text: replyBody,
+                    parent_thread: repliedID,
+                })
+            })
+            if (res.status == 200){
+                console.log('yes')
+            }else{
+                console.log('something bad happen')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+   
+}

@@ -71,7 +71,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 function checkAuthentication(req, res, next) {
-    if (req.isAuthenticated() || req.path.startsWith('/auth')) {
+    if (req.isAuthenticated()) {
         return next()
     }
     res.redirect('/auth/login')
