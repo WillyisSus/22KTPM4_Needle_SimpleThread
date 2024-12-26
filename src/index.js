@@ -102,6 +102,7 @@ app.get("/thread/:thread_id",checkAuthentication, (req, res) => {
     res.locals.thread_id = req.params.thread_id;
     res.render("thread");
 });
+app.use("/search", require("./router/searchRouter.js"));
 
 //app.get("/notifications", (req, res) => res.render("notifications"));
 
