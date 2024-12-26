@@ -50,6 +50,13 @@ Handlebars.registerHelper('if', function (value, options) {
         return options.fn(this);
     }
 });
+Handlebars.registerHelper('ifn', function (value, options) {
+    if (value === "new") {
+        return options.fn(this);
+    }
+});
+
+
 
 app.use(express.json());
 app.use(xssClean());
@@ -63,26 +70,35 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
+function checkAuthentication(req, res, next){
+    if (req.isAuthenticated() || req.path.startsWith('/auth')){
+        return next()
+    }
+    res.redirect('/auth/login')
+}
+function checkNotAuthentication(req, res, next){
+    if (req.isAuthenticated()){
+        return res.redirect('/')
+    }
+    next();
+}
 
 app.set("view engine", "hbs");
 app.listen(port, () => console.log(`Example app listening on port ${port}`))
 app.use("/thread", require('./router/threadRouter'))
-app.get("/", (req, res) => res.render("home-feed"));
-app.get("/home-feed", (req, res) => {
+app.get("/", checkAuthentication,  (req, res) => res.render("home-feed"));
+app.get("/home-feed", checkAuthentication, (req, res) => {
     res.render("home-feed")
 });
-app.get("/for-you-page", (req, res) => res.render("for-you-page"));
+app.get("/for-you-page",checkAuthentication, (req, res) => res.render("for-you-page"));
 
 app.use("/cur-profile", require("./router/curProfileRouter.js"));
 app.use("/profile", require("./router/profileRouter.js"));
-app.get("/greetings", (req, res) => res.render("index", { layout: "logged-out-layout" }));
+app.get("/greetings", checkNotAuthentication,  (req, res) => res.render("index", { layout: "logged-out-layout" }));
 //app.get("/login", (req, res) => res.render("login", { layout: "logged-out-layout" }));
 //app.get("/signup", (req, res) => res.render("signup", { layout: "logged-out-layout" }));
 //app.get("/forgot-password", (req, res) => res.render("forgotpw", { layout: "logged-out-layout" }));
-app.get("/thread/:thread_id", (req, res) => {
+app.get("/thread/:thread_id",checkAuthentication, (req, res) => {
     res.locals.thread_id = req.params.thread_id;
     res.render("thread");
 });

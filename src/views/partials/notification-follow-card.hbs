@@ -1,9 +1,9 @@
-<div class="notification-card d-flex flex-row">
+<div class="notification-card d-flex flex-row" id="{{notif_id}}">
     <div class="notification-category">
         <i class="bi bi-person-plus-fill" style="font-size: 2em; color: #000000;"></i>
     </div>
     <div class="card-content border border-0">
-        <div class="card-header border-0 bg-white border-black rounded-0 p-0 " > 
+        <div class="card-header border-0 bg-white border-black rounded-0 p-0 " id="c{{notif_id}}"> 
             <div class="username-date d-flex justify-content-between">
                 <span>
                     <img src="images/avatar.png" alt="avatar" class="border border-1 border-dark rounded-circle" style="width: 36px; height:36px;">
@@ -29,3 +29,9 @@
         </div>
     </div>
 </div>
+{{#ifn notif_name}}
+    <script>
+        document.getElementById({{notif_id}}).style.backgroundColor = "lightgray";
+        document.getElementById("c{{notif_id}}").setAttribute("style", "background-color: lightgray !important;");
+    </script>
+{{/ifn}}

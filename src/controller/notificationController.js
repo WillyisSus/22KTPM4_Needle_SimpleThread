@@ -12,7 +12,7 @@ controller.showNotif = async (req, res) => {
             followee_id: 2
         }
     })
-    follownotif.forEach(follow => {notif.push({user_id: follow.follower_id, notif_id: follow.notif_status, type: 'follow'})});
+    follownotif.forEach(follow => {notif.push({thread_id: null, user_id: follow.follower_id, notif_id: follow.notif_status, type: 'follow'})});
 
     let userthread = await models.Thread.findAll({
         attributes: ['thread_id'],
@@ -24,20 +24,20 @@ controller.showNotif = async (req, res) => {
     userthread.forEach(thread => {nthread.push(thread.thread_id)});
 
     let replynotifs = await models.Thread.findAll({
-        attributes: ['creator', 'comment_notif_status'],
+        attributes: ['thread_id', 'creator', 'comment_notif_status'],
         where: {
             parent_thread: {[Op.in]: nthread}
         }
     });
-    replynotifs.forEach(reply => {notif.push({user_id: reply.creator, notif_id: reply.comment_notif_status, type: 'reply'})});
+    replynotifs.forEach(reply => {notif.push({thread_id: reply.thread_id, user_id: reply.creator, notif_id: reply.comment_notif_status, type: 'reply'})});
 
     let likenotifs = await models.Like.findAll({
-        attributes: ['user_id', 'notif_status'],
+        attributes: ['thread_id', 'user_id', 'notif_status'],
         where: {
             thread_id: {[Op.in]: nthread}
         }
     });
-    likenotifs.forEach(like => {notif.push({user_id: like.user_id, notif_id: like.notif_status, type: 'like'})});
+    likenotifs.forEach(like => {notif.push({thread_id: like.thread_id, user_id: like.user_id, notif_id: like.notif_status, type: 'like'})});
 
     notif.sort((a, b) => {
         return b.notif_id - a.notif_id;
@@ -69,15 +69,18 @@ controller.showNotif = async (req, res) => {
 
 controller.markRead = async (req, res) => {
     const notif_id = req.body.notif_id;
-    console.log(notif_id);
-    await models.NotificationStatus.update(
-        {status_name: "seen"},
-        {where: {status_id: notif_id}}
-    );
+    let status = await models.NotificationStatus.findOne({
+        where: {status_id: notif_id}
+    });
+    if (status.status_name === "new") {
+        await models.NotificationStatus.update(
+            {status_name: "seen"},
+            {where: {status_id: notif_id}}
+        );
+    }
 }
 controller.markDel = async (req, res) => {
     const notif_id = req.body.notif_id;
-    console.log(notif_id);
     await models.NotificationStatus.update(
         {status_name: "deleted"},
         {where: {status_id: notif_id}}
