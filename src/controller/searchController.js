@@ -6,11 +6,7 @@ controller.showSearchPage = async (req, res) => {
     const user = await req.user;
     let user_list = [];
     if (Object.keys(req.query).length === 0) {
-        user_list = await models.User.findAll({
-            where: {
-                [Op.not]: {user_id: user}
-            }
-        });
+        user_list = []
     } else {
         user_list = await models.User.findAll({
             where: {

@@ -181,13 +181,13 @@ controller.postNewThread = async (req, res) => {
     try {
         await models.Thread.create({
             text: text,
-            picture: (picture?process.env.IMAGE_SERVER:"") + picture,
+            picture: (picture?process.env.IMAGE_SERVER + picture: null),
             created_at: created_at,
             creator: user,
             parent_thread: parent_thread,
             comment_notif_status: comment_notif_status
         })
-        res.status(201).send("created")
+        res.status(200).send("created")
 
     } catch (error) {
         console.log(error)
