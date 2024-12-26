@@ -1,8 +1,8 @@
 {
     "development": {
         "username": "postgres",
-        "password": "01082004",
-        "database": "weeb_proj",
+        "password": "Maizchi709",
+        "database": "needle",
         "host": "127.0.0.1",
         "dialect": "postgres"
     },
