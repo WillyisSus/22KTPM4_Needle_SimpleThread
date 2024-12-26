@@ -6,11 +6,16 @@ function checkPasswordConstraint(password) {
 async function sendPasswordResetBody(event) {
     event.preventDefault();
     const form = document.querySelector("#resetPasswordForm")
-    const newPw = document.querySelector("#NewPw").value;
-    const confirmPassword = document.querySelector("#ConfirmPw").value;
+    var newPw = null;
+    var confirmPassword = null;
+    newPw = document.querySelector("#NewPw").value;
+    confirmPassword = document.querySelector("#ConfirmPw").value;
     const action = form.action;
     const errorMessage = document.querySelector("#clientErrorMessage");
-    if (newPw === confirmPassword){
+    if (newPw == null || confirmPassword == null || newPw){
+        errorMessage.innerHTML = "<span class=\"text-danger\">Please fill in all field</span>"
+    }
+    else if (newPw === confirmPassword){
         console.log("matches")
         if (checkPasswordConstraint(newPw)){
             console.log("meet constraints")
