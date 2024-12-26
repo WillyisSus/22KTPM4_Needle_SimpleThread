@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-between">
+    <div class="d-flex gap-3">
+        <img src="{{avatar}}" alt="avatar" class="border border-1 border-dark rounded-circle"
+            style="width: 36px; height:36px;">
+        <div class="d-flex flex-column">
+            <div><b>{{display_name}}</b></div>
+            <div>{{username}}</div>
+        </div>
+    </div>
+
+    {{#if is_followed}}
+    <button type="button" data-username="{{username}}" class="btn btn-outline-dark col-3" onclick="followClicked(this)">Unfollow</button>
+    {{else}}
+    <button type="button" data-username="{{username}}" class="btn btn-dark col-3" onclick="followClicked(this)">Follow</button>
+    {{/if}}
+</div>
