@@ -56,8 +56,11 @@
                                         class="bi bi-person-circle"></i> <span>Profile</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/greetings" aria-current="page"><i
-                                        class="bi bi-arrow-bar-left"></i> <span>Logout</span></a>
+                                <form action="/auth/logout" method="post">
+                                <button type="submit" class="nav-link active text-dark"><i
+                                    class="bi bi-arrow-bar-left"></i>
+                                    <span>Logout</span></button>
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -99,9 +102,11 @@
                         <span>Profile</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/greetings" aria-current="page"><i
+                    <form action="/auth/logout" method="post">
+                        <button type="submit" class="nav-link active text-dark"><i
                             class="bi bi-arrow-bar-left"></i>
-                        <span>Logout</span></a>
+                        <span>Logout</span></button>
+                    </form>
                 </li>
             </ul>
         </div>

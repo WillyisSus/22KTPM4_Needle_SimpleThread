@@ -284,5 +284,6 @@ controller.logOutUser = (req, res) => {
         if (err) { return next(err); }
         res.redirect('/');
       });
+
 }
 module.exports = controller;
