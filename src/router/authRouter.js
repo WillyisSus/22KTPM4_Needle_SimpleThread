@@ -1,10 +1,15 @@
 const router = require('express').Router();
 const controller = require('../controller/authController');
 const {body} = require('express-validator');
-
-router.get("/signup", controller.showSignup);
-router.get("/login", controller.showLogin);
-router.get("/forgot-password", controller.showForgot);
+function checkNotAuthentication(req, res, next){
+    if (req.isAuthenticated()){
+        return res.redirect('/')
+    }
+    next();
+}
+router.get("/signup", checkNotAuthentication, controller.showSignup);
+router.get("/login",checkNotAuthentication, controller.showLogin);
+router.get("/forgot-password",checkNotAuthentication, controller.showForgot);
 
 router.post("/signup",
     body("Username").matches(/^[a-zA-Z0-9]{6,32}$/, "i").withMessage("Username must be between 6 to 32 characters and contain only letters and numbers."),

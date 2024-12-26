@@ -128,14 +128,14 @@ controller.getFeedThreads = async (req, res) => {
 controller.postNewThread = async (req, res) => {
     let user = await req.user;
     console.log(user);
-    const { text, picture, created_at, creator, parent_thread, comment_notif_status } = req.body
+    const { text, picture, created_at, parent_thread, comment_notif_status } = req.body
     console.log(text)
     try {
         await models.Thread.create({
             text: text,
             picture: picture,
             created_at: created_at,
-            creator: creator,
+            creator: user,
             parent_thread: parent_thread,
             comment_notif_status: comment_notif_status
         })
