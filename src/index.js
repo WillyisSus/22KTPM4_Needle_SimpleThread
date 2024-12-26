@@ -50,6 +50,12 @@ Handlebars.registerHelper('if', function (value, options) {
         return options.fn(this);
     }
 });
+Handlebars.registerHelper('ifn', function (value, options) {
+    if (value === "new") {
+        return options.fn(this);
+    }
+});
+
 
 
 app.use(express.json());
