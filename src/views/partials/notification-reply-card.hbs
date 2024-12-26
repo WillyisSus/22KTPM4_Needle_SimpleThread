@@ -20,8 +20,8 @@
                             <i class="bi bi-three-dots"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="triggerId">
-                            <button class="dropdown-item text-success" href="#"><i class="bi bi-check-lg" style="font-size: 1rem;"></i> Mark as read</button>
-                            <button class="dropdown-item text-danger" href="#"><i class="bi bi-x-lg" style="font-size: 1rem;"></i> Remove notifications</button>
+                            <button class="dropdown-item text-success" data-notifid="{{notif_id}}" href="#" onclick="marknotif(this)"><i class="bi bi-check-lg" style="font-size: 1rem;"></i> Mark as read</button>
+                            <button class="dropdown-item text-danger" data-notifid="{{notif_id}}" href="#" onclick="removenotif(this)"><i class="bi bi-x-lg" style="font-size: 1rem;"></i> Remove notifications</button>
                         </div>
                     </div>
                 </div>  
