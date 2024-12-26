@@ -36,16 +36,16 @@ app.engine('hbs', expressHbs.engine({
 }));
 
 var Handlebars = expressHbs.create({}).handlebars;
-Handlebars.registerHelper('switch', function(value, options) {
+Handlebars.registerHelper('switch', function (value, options) {
     this.switch_value = value;
     return options.fn(this);
 });
-Handlebars.registerHelper('case', function(value, options) {
+Handlebars.registerHelper('case', function (value, options) {
     if (value == this.switch_value) {
         return options.fn(this);
     }
 });
-Handlebars.registerHelper('if', function(value, options) {
+Handlebars.registerHelper('if', function (value, options) {
     if (value != "deleted") {
         return options.fn(this);
     }
@@ -80,9 +80,8 @@ function checkNotAuthentication(req, res, next){
 app.set("view engine", "hbs");
 app.listen(port, () => console.log(`Example app listening on port ${port}`))
 app.use("/thread", require('./router/threadRouter'))
-app.get("/", checkAuthentication, (req, res) => res.render("home-feed"));
-app.get("/home-feed", checkAuthentication,  (req, res) => {
-    res.locals.threads = [{ username: "jenny" }, { username: "penny" }]
+app.get("/", (req, res) => res.render("home-feed"));
+app.get("/home-feed", (req, res) => {
     res.render("home-feed")
 });
 app.get("/for-you-page", (req, res) => res.render("for-you-page"));
@@ -93,7 +92,12 @@ app.get("/greetings", checkNotAuthentication,  (req, res) => res.render("index",
 //app.get("/login", (req, res) => res.render("login", { layout: "logged-out-layout" }));
 //app.get("/signup", (req, res) => res.render("signup", { layout: "logged-out-layout" }));
 //app.get("/forgot-password", (req, res) => res.render("forgotpw", { layout: "logged-out-layout" }));
+app.get("/thread/:thread_id", (req, res) => {
+    res.locals.thread_id = req.params.thread_id;
+    res.render("thread");
+});
+
 //app.get("/notifications", (req, res) => res.render("notifications"));
-app.get("/thread", (req, res) => res.render("thread"));
+
 app.use("/notifications", require('./router/notificationRouter'));
 app.use("/auth", require('./router/authRouter'));
