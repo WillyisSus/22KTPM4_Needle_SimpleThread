@@ -2,6 +2,7 @@ const controller = {};
 const { json } = require('express');
 const models = require('../models');
 const { QueryTypes } = require('sequelize');
+const { sequelize, Sequelize } = require("../models");
 
 
 function buildThreadQuery(only_following, is_creator_specified, is_thread_parent_specified, is_thread_id_specified) {
@@ -31,7 +32,13 @@ function buildThreadQuery(only_following, is_creator_specified, is_thread_parent
         ) > 0 OR THREAD.CREATOR = :session_user_id AS IS_FOLLOWING,
         COUNT(DISTINCT FF.FOLLOWER_ID) AS NFOLLOWERS,
         COUNT(DISTINCT "like".USER_ID) AS NLIKES,
-        COUNT(DISTINCT CHILD_THREAD.THREAD_ID) AS NREPLIES
+        COUNT(DISTINCT CHILD_THREAD.THREAD_ID) AS NREPLIES,
+        SUM(
+            CASE
+                WHEN "like".USER_ID = :session_user_id THEN 1
+                ELSE 0
+            END
+        ) > 0 AS HAVE_LIKED
     FROM
         PUBLIC.THREAD THREAD
         JOIN PUBLIC."user" "user" ON THREAD.CREATOR = "user".USER_ID
@@ -188,24 +195,85 @@ controller.postNewThread = async (req, res) => {
     }
 }
 controller.postThreadReply = async (req, res) => {
+    const {text = "", parent_thread = -1} = req.body;
+    const user = await req.user;
     console.log(req.body)
-    res.render("home-feed")
+    try {
+        const notif_status = await models.NotificationStatus.create({
+            status_name: "new"
+        });
+        const reply = await models.Thread.create({
+            creator: user,
+            parent_thread: parent_thread,
+            text: text,
+            comment_notif_status: notif_status.status_id,
+        })
+        if (reply){
+            res.status(200).send("/thread/" + reply.thread_id);
+        }else{
+            res.status(500).send('Something bad happened')
+        }
+    } catch (error) {
+        res.status(500).send('Some thing bad happen')
+        
+    }
 }
 
 controller.like = async (req, res) => {
     try {
         const session_user_id = await req.user;
         const thread_id = req.params.thread_id;
-        const notif_status = await models.NotificationStatus.create({
-            status_name: "new"
-        });
-        await models.Like.create({
-            thread_id,
-            user_id: session_user_id,
-            notif_status: notif_status.status_id
+
+        await sequelize.transaction(async () => {
+            const notif_status = await models.NotificationStatus.create({
+                status_name: "new"
+            });
+            await models.Like.create({
+                thread_id,
+                user_id: session_user_id,
+                notif_status: notif_status.status_id
+            });
         });
 
         res.status(200).send("Liked");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal server error");
+    }
+}
+
+controller.unlike = async (req, res) => {
+    try {
+        const session_user_id = await req.user;
+        const thread_id = req.params.thread_id;
+
+        await sequelize.transaction(async () => {
+
+
+            const notif_status = await models.Like.findOne({
+                where: {
+                    thread_id,
+                    user_id: session_user_id
+                }
+            });
+
+            await models.Like.destroy({
+                where: {
+                    thread_id,
+                    user_id: session_user_id
+                }
+            });
+
+            await models.NotificationStatus.destroy({
+                where: {
+                    status_id: notif_status.notif_status
+                }
+            });
+
+
+        });
+
+        res.status(200).send("Unliked");
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server error");

@@ -111,7 +111,6 @@
             </ul>
         </div>
         <!-- Thread area -->
-
         <!-- type="button"
                 class="btn btn-primary btn-lg"
                 data-bs-toggle="modal"
@@ -143,7 +142,7 @@
                                     </div>
                                     <div
                                         class="card-content border border-0 d-flex flex-column justify-content-between w-100 px-2">
-                                        <p class="fw-bold d-inline-block my-1">Username</p>
+                                        <p class="fw-bold d-inline-block my-1">You are creating a thread</p>
 
                                         <textarea name="thread-body" placeholder="Needle your thread here..."
                                             id="create-thread-body" maxlength="1000"></textarea>
@@ -175,93 +174,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="replyThread" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitleId">
-                            Replying a thread
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="d-flex flex-row">
-                                <div class="avatar-is-replied">
-                                    <div class="avatar-and-follow-icon ">
-                                        <img src="/images/avatar.png" alt="avatar"
-                                            class="border border-1 border-dark rounded-circle"
-                                            style="width: 36px; height:36px;">
-                                        <i class="follow-icon-avatar bi bi-plus-circle"></i>
-                                    </div>
-                                    <div class="vertical-reply-bar"></div>
-                                </div>
-
-                                <div class="card-content border border-0 px-2">
-                                    <div class="card-header border-0 bg-white border-black rounded-0 p-0 ">
-                                        <div class="username-date d-flex justify-content-between">
-                                            <span>
-                                                <p class="fw-bold d-inline-block my-0">Username</p>
-                                                <i class="bi bi-clock"></i>
-                                                <span>dd/mm/yyyy</span>
-                                            </span>
-                                            <!-- <i class="bi bi-three-dots"></i> -->
-                                        </div>
-                                    </div>
-                                    <div class="card-body p-0">
-                                        <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas,
-                                            nulla?</div>
-                                        <div class="overflow-hidden rounded-2 border border-1 border-dark"
-                                            style="margin-top: 8px; display: none;">
-                                            <img src="" alt="Image of thread" style="width: 100%;">
-                                        </div>
-                                    </div>
-
-                                    <!-- <div class="card-footer bg-white border-top-0">
-                                            <p class="d-inline-block"><i class="bi bi-chat-left-text"></i> Replies</p>
-                                            <p class="d-inline-block"><i class="bi bi-heart"></i> Likes</p>
-                                        </div> -->
-                                </div>
-
-                            </div>
-                            <div class="d-flex flex-row">
-                                <div class="avatar-and-follow-icon">
-                                    <img src="/images/avatar.png" alt="avatar"
-                                        class="border border-1 border-dark rounded-circle"
-                                        style="width: 36px; height:36px;">
-                                </div>
-                                <div
-                                    class="card-content border border-0 d-flex flex-column justify-content-between w-100 px-2">
-                                    <p class="fw-bold d-inline-block my-1">Username <span
-                                            class="text-primary fw-medium">replying @username</span></p>
-
-                                    <textarea name="thread-body" placeholder="Replying..." id="reply-thread-body"
-                                        maxlength="1000"></textarea>
-
-                                    <div class="image-card">
-                                        <img id="create-thread-body-image" src="" alt="">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!-- <div>
-                                    <label for="thread-image"><i class="bi bi-image-fill fs-5 me-2"></i>Upload an image</label>
-                                    <input id="thread-image" class="d-none" type="file" accept="image/png, image/jpeg">
-                                    
-                                </div> -->
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal"
-                            onclick="clearThreadForm()">
-                            Close
-                        </button>
-                        <button type="button" class="btn btn-dark">Post</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <!-- Button trigger modal -->
 
         <!-- Modal -->

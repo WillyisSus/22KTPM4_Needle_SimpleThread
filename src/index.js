@@ -10,6 +10,7 @@ const session = require("express-session");
 const flash = require('express-flash');
 const passport = require('passport');
 const xssClean = require('xss-clean');
+const models = require('./models');
 //const helmet = require('helmet');
 
 // cấu hình giao thức
@@ -70,35 +71,49 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-function checkAuthentication(req, res, next){
-    if (req.isAuthenticated() || req.path.startsWith('/auth')){
+function checkAuthentication(req, res, next) {
+    if (req.isAuthenticated()) {
         return next()
     }
     res.redirect('/auth/login')
 }
-function checkNotAuthentication(req, res, next){
-    if (req.isAuthenticated()){
+function checkNotAuthentication(req, res, next) {
+    if (req.isAuthenticated()) {
         return res.redirect('/')
     }
     next();
 }
 
+app.use((req, res, next) => {
+    if (!req.user) {
+        return next();
+    }
+    console.log(req.user);
+    models.User.findByPk(req.user).then(user => {
+        res.locals.user = user;
+        next();
+    }).catch(err => {
+        console.error(err);
+        res.status(400).send("Bad request");
+    });
+});
+
 app.set("view engine", "hbs");
 app.listen(port, () => console.log(`Example app listening on port ${port}`))
-app.use("/thread", require('./router/threadRouter'))
-app.get("/", checkAuthentication,  (req, res) => res.render("home-feed"));
+app.use("/thread", checkAuthentication, require('./router/threadRouter'))
+app.get("/", checkAuthentication, (req, res) => res.render("home-feed"));
 app.get("/home-feed", checkAuthentication, (req, res) => {
     res.render("home-feed")
 });
-app.get("/for-you-page",checkAuthentication, (req, res) => res.render("for-you-page"));
+app.get("/for-you-page", checkAuthentication, (req, res) => res.render("for-you-page"));
 
-app.use("/cur-profile", require("./router/curProfileRouter.js"));
-app.use("/profile", require("./router/profileRouter.js"));
-app.get("/greetings", checkNotAuthentication,  (req, res) => res.render("index", { layout: "logged-out-layout" }));
+app.use("/cur-profile", checkAuthentication, require("./router/curProfileRouter.js"));
+app.use("/profile", checkAuthentication, require("./router/profileRouter.js"));
+app.get("/greetings", checkNotAuthentication, (req, res) => res.render("index", { layout: "logged-out-layout" }));
 //app.get("/login", (req, res) => res.render("login", { layout: "logged-out-layout" }));
 //app.get("/signup", (req, res) => res.render("signup", { layout: "logged-out-layout" }));
 //app.get("/forgot-password", (req, res) => res.render("forgotpw", { layout: "logged-out-layout" }));
-app.get("/thread/:thread_id",checkAuthentication, (req, res) => {
+app.get("/thread/:thread_id", checkAuthentication, (req, res) => {
     res.locals.thread_id = req.params.thread_id;
     res.render("thread");
 });

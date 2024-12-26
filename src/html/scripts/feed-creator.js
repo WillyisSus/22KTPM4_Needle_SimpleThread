@@ -43,17 +43,17 @@ async function upgradeToFeedControl(container, url, options, renderPostContent) 
 }
 
 function threadPostContent(post) {
-    const { thread_id, text, picture, created_at, nfollowers, nreplies, nlikes, is_following, display_name, username, avatar } = post;
+    const { thread_id, text, picture, created_at, nfollowers, nreplies, nlikes, is_following, display_name, username, avatar, have_liked } = post;
 
 
     return `
     <div class="thread-card d-flex flex-row">
         <div class="avatar-and-follow-icon">
             <a href="/profile/${username}">
-                <img src="${avatar}" alt="avatar" class="border border-1 border-dark rounded-circle"
+                <img src="${avatar ? avatar : '/images/avatar.png'}" alt="avatar" class="border border-1 border-dark rounded-circle"
                     style="width: 36px; height:36px;">
             </a>
-            <i class="follow-icon-avatar bi bi-plus-circle ${is_following ? 'd-none' : ''}" data-bs-toggle="modal" data-bs-target="#followPopup"></i>
+            <i class="follow-icon-avatar bi bi-plus-circle ${is_following ? 'd-none' : ''}" data-bs-toggle="modal" data-bs-target="#followPopup${thread_id}"></i>
 
         </div>
         <div class="card-content border border-0">
@@ -69,21 +69,20 @@ function threadPostContent(post) {
             </div>
             <div class="card-body p-0" onclick="javascript:window.location.href='/thread/${thread_id}'">
                 <div class="">${text}</div>
-                ${(picture) ? `
-                    <div class="overflow-hidden rounded-2 border border-1 border-dark" style="margin-top: 8px;">
-                        <img src="${picture}" alt="Image of thread" style="width: 100%;">
-                    </div>
-                ` : ""}
+                <div class="overflow-hidden rounded-2 border border-1 border-dark" 
+                    style="margin-top: 8px;  ${picture ? '' : 'display: none;'}">
+                    <img src="${picture}" alt="Image of thread" style="width: 100%;">
+                </div>
             </div>
 
             <div class="card-footer bg-white border-top-0">
-                <p class="d-inline-block" data-bs-toggle="modal" data-bs-target="#replyThread"
+                <p class="d-inline-block" data-bs-toggle="modal" data-bs-target="#replyThread${thread_id}"
                     onclick="getImageOfThread(event)"><i class="bi bi-chat-left-text"></i> ${nreplies} Replies</p>
-                <p class="d-inline-block" id="${"thread_id_" + thread_id}"><i class="bi bi-heart" onclick='like(${thread_id})'></i> ${nlikes} Likes</p>
+                <p class="d-inline-block" ><i class="bi ${have_liked ? "bi-heart-fill text-danger" : "bi-heart"}" onclick='like(${thread_id}, this)'></i> <span id="${"thread_id_" + thread_id}"> ${nlikes} Likes</span></p>
             </div>
         </div>
 
-        <div class="modal fade" id="followPopup" tabindex="-1" role="dialog" aria-labelledby="followPopup"
+        <div class="modal fade" id="followPopup${thread_id}" tabindex="-1" role="dialog" aria-labelledby="followPopup"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -102,7 +101,7 @@ function threadPostContent(post) {
                                     <p class="w-100 px-2">bio</p>
                                 </div>
                                 <div class="col-3">
-                                    <img src="${avatar}" alt="user-avatar"
+                                    <img src="${avatar ? avatar : '/images/avatar.png'}" alt="user-avatar"
                                         class=" border border-1 border-dark rounded-circle w-100">
                                 </div>
                             </div>
@@ -121,7 +120,83 @@ function threadPostContent(post) {
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="replyThread${thread_id}" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form id="form_reply_thread_${thread_id}" data-id="${thread_id}" onsubmit=postAThreadReply(event)> 
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalTitleId">
+                                Replying a thread
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="d-flex flex-row">
+                                    <div class="avatar-is-replied">
+                                        <div class="avatar-and-follow-icon ">
+                                            <img src="${avatar ? avatar : '/images/avatar.png'}" alt="avatar"
+                                                class="border border-1 border-dark rounded-circle"
+                                                style="width: 36px; height:36px;">
+                                            <i class="follow-icon-avatar bi bi-plus-circle ${is_following ? 'd-none' : ''}"></i>
+                                        </div>
+                                        <div class="vertical-reply-bar"></div>
+                                    </div>
 
+                                    <div class="card-content border border-0 px-2">
+                                        <div class="card-header border-0 bg-white border-black rounded-0 p-0 ">
+                                            <div class="username-date d-flex justify-content-between">
+                                                <span>
+                                                    <p class="fw-bold d-inline-block my-0">${display_name}</p>
+                                                    <i class="bi bi-clock"></i>
+                                                    <span>${new Date(created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div class="">${text}</div>
+                                            <div class="overflow-hidden rounded-2 border border-1 border-dark"
+                                                style="margin-top: 8px; ${picture ? '' : 'display: none;'}">
+                                                <img src="${picture}" alt="Image of thread" style="width: 100%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="d-flex flex-row">
+                                    <div class="avatar-and-follow-icon">
+                                        <img src="/images/avatar.png" alt="avatar"
+                                            class="border border-1 border-dark rounded-circle"
+                                            style="width: 36px; height:36px;">
+                                    </div>
+                                    <div
+                                        class="card-content border border-0 d-flex flex-column justify-content-between w-100 px-2">
+                                        <p class="fw-bold d-inline-block my-1">You are <span
+                                                class="text-primary fw-medium">replying @${username}</span></p>
+
+                                        <textarea name="thread-body" placeholder="Replying..." id="reply-thread-body"
+                                            maxlength="1000"></textarea>
+
+                                        <div class="image-card">
+                                            <img id="create-thread-body-image" src="" alt="">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal"
+                                onclick="clearThreadForm()">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-dark" data-bs-dismiss="modal">Post</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     </div>`;
 }
