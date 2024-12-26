@@ -10,15 +10,15 @@
         </div>
         <div class="container" id="form-section">
             <h1>Reset Password ✍🏿</h1>
+            {{#if emailNotSent}}
             <br>
-            <h5>Today is a new day. It's your day. You shape it. Sign in to start managing your threads.</h5>
+            <h5>Please make sure your email is verified before reset you password. If not, <a href="/auth/verify-email/?userRequest=true">verify it now</a></h5>
             <br>
-            <form action="javascript:window.location.href='/auth/login'">
-                
+            <form action="/auth/forgot-password" method="post">
                 <div class="mb-3 row">
                     <label
                         for="NewPw"
-                        >Username or email
+                        >Username or email to reset
                     </label>
                     <div>
                         <input
@@ -31,36 +31,6 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label
-                        for="NewPw"
-                        >New password
-                    </label>
-                    <div>
-                        <input
-                            type="password"
-                            class="form-control"
-                            name="NewPw"
-                            id="NewPw"
-                            placeholder="At least 8 characters"
-                        />
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label
-                        for="ConfirmPw"
-                        >Confirm new password
-                    </label>
-                    <div>
-                        <input
-                            type="password"
-                            class="form-control"
-                            name="ConfirmPw"
-                            id="ConfirmPw"
-                            placeholder="******"
-                        />
-                    </div>
-                </div>
-                 <div class="mb-3 row">
                     <p class="text-danger">{{{message}}}</p>
                 </div>
                 <div class="mb-3 row">
@@ -72,7 +42,12 @@
                 </div>
             </form>
             <br>
-            <p>Suddenly remember it? <a href="/auth/login" class="text-decoration-none">Sign in</a></p>
+            {{else}}
+            <br>
+            <h5>Please check you email 📩</h5>
+            <br>
+            {{/if}}
+            <p id="#toLogin">Suddenly remember it? <a href="/auth/login" class="text-decoration-none">Sign in</a></p>
         </div>                  
     </div>           
 </main>

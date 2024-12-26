@@ -13,7 +13,9 @@
             <br>
             <h5>Today is a new day. It's your day. You shape it. Sign in to start managing your threads.</h5>
             <br>
-            <p class="text-danger">{{message}}</p>
+            {{#if messages.error}}
+            <p class="text-danger">{{{messages.error}}}</p>
+            {{/if}}
             <form action="/auth/login" method="post">
                 <div class="mb-3 row">
                     <label

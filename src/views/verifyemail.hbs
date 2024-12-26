@@ -1,1 +1,45 @@
-<h1>Xác nhận email của bạn: {{message}}</h1>
+<main>
+    <div class="container-fluid w-100" id="content">
+        <div id="image-place">
+            <img
+                src="/images/image_placeholder.jpg"
+                class="img-fluid rounded-5"
+                id="Image"
+                alt="/images/image_placeholder.jpg"
+            />
+        </div>
+        <div class="container" id="form-section">
+            <h1>Welcome friends 🫱🏿‍🫲🏻</h1>
+            <br>
+            <h5>{{message}}</h5>
+            <br>
+            {{#if userRequest}}
+            <form action="/auth/verify-email" method="post">
+                <div class="mb-3 row">
+                    <label
+                        for="Email"
+                        >Email
+                    </label>
+                    <div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="Email"
+                            id="Email"
+                            placeholder="abc@mail.com"                           
+                        />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <div>
+                        <button type="submit" class="btn btn-dark">
+                            Send Email
+                        </button>
+                    </div>
+                </div>
+            </form>
+            {{/if}}
+            <p>Do not want to verify now?  <a href="/auth/login" class="text-decoration-none">Sign in</a></p>
+        </div>                  
+    </div>           
+</main>

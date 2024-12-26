@@ -6,15 +6,30 @@ const LocalStategy = require('passport-local').Strategy
 
 function initialize(passport) {
     const authenticateUser = async (Email, Password, done) => {
-        const user = await models.User.findOne({ where: 
-            { [Op.or]:
-                {username: Email,
-                 email: Email
-                }}});
+        var user;
+        if (Email.search("@") != -1){
+            user = await models.User.findOne({ where: 
+                {email: {
+                    [Op.like]: Email + "%"}}}
+                );
+            if (user){
+                if (user.email.search("%") != -1){
+                    console.log("Not verify")
+                    return done(null, false, { message: 'Your email is not verified. <br> Verify it through Forgot Password -> verify it now' })
+                }
+            }
+        } else {
+            user = await models.User.findOne({ where: 
+                { [Op.or]:
+                    {username: Email,
+                     email: Email
+                    }}});
+        }
+            
         console.log(JSON.stringify(user))
         if (user == null) {
-            console.log('No user with that username')
-            return done(null, false, { message: 'No user with that username' })
+            console.log('No user with that username or email')
+            return done(null, false, { message: 'No user with that username or email' })
         }
         try {
             if (await bcrypt.compareSync(Password, user.password)) {
