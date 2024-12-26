@@ -1,11 +1,13 @@
 <div id="thread-display-section">
         <div class="thread-container">
-            {{#each notif}}
-                {{#switch type}}
-                    {{#case "reply"}} {{#ifs notif_name}} {{>notification-reply-card}} {{/ifs}} {{/case}}
-                    {{#case "like"}} {{#ifs notif_name}} {{>notification-like-card}} {{/ifs}} {{/case}}
-                    {{#case "follow"}} {{#ifs notif_name}} {{>notification-follow-card}} {{/ifs}} {{/case}}
-                {{/switch}}
+            <div class="blog__sidebar__search">
+                <form action="/search" method="GET">
+                    <input type="text" placeholder="Search..." name="keyword">
+                    <button type="submit"><span class="icon_search"></span></button>
+                </form>
+            </div>
+            {{#each user}}
+                {{> search-cards}}
             {{/each}}
         </div>
     </div>

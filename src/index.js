@@ -46,7 +46,7 @@ Handlebars.registerHelper('case', function (value, options) {
         return options.fn(this);
     }
 });
-Handlebars.registerHelper('if', function (value, options) {
+Handlebars.registerHelper('ifs', function (value, options) {
     if (value != "deleted") {
         return options.fn(this);
     }

@@ -9,7 +9,7 @@ controller.showNotif = async (req, res) => {
     let follownotif = await models.FollowingFollower.findAll({
         attributes: ['follower_id', 'notif_status'],
         where: {
-            followee_id: 2
+            followee_id: user
         }
     })
     follownotif.forEach(follow => {notif.push({thread_id: null, user_id: follow.follower_id, notif_id: follow.notif_status, type: 'follow'})});
@@ -17,7 +17,7 @@ controller.showNotif = async (req, res) => {
     let userthread = await models.Thread.findAll({
         attributes: ['thread_id'],
         where: {
-            creator: 2
+            creator: user
         }
     });
     let nthread = [];
