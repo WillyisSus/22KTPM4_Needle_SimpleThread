@@ -24,4 +24,5 @@ router.post("/verify-email", controller.sendVerifyEmail)
 router.post("/forgot-password", controller.sendForgotPasswordForm);
 router.get("/forgot-password/:token", controller.showRequestPasswordForm);
 router.post('/reset-password/:token', controller.changeUserPassword)
+router.post('/logout', controller.logOutUser);
 module.exports = router;

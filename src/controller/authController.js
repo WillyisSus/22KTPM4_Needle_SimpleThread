@@ -278,4 +278,11 @@ controller.changeUserPassword = async (req, res) => {
         return res.render('resetpassword', {layout: "logged-out-layout", expiredMessage: "The link is expired or bad token"})
     }
 }
+
+controller.logOutUser = (req, res) => {
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
+}
 module.exports = controller;
