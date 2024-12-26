@@ -225,3 +225,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setupInfiniteScroll();
 });
 
+//feed
+let feedContainer = document.getElementById('cur-profile-thread-container');
+
+import('../feed-creator.js').then(({ upgradeToFeedControl, threadPostContent }) =>
+    upgradeToFeedControl(feedContainer, '/thread/cur-profile', { user_id: "current_user" }, threadPostContent)
+);
+
