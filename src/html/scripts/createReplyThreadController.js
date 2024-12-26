@@ -93,7 +93,6 @@ async function sendPostThreadData(event){
                 console.log(filePath)
             }
         }
-
         const res = await fetch('/thread/post', {
             method: 'POST',
             headers: {
@@ -103,7 +102,6 @@ async function sendPostThreadData(event){
                 text: text,
                 picture: filePath,
                 created_at: Date.now(),
-                creator: 1,
                 parent_thread: null,
                 comment_notif_status: null    
             })

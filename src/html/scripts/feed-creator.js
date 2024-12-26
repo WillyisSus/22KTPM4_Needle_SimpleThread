@@ -1,4 +1,4 @@
-function upgradeToFeedControl(container, url, options, renderPostContent) {
+async function upgradeToFeedControl(container, url, options, renderPostContent) {
     let isFetching = false;
     let min_thread_id = 0;
     let max_thread_id = 0;
@@ -16,7 +16,7 @@ function upgradeToFeedControl(container, url, options, renderPostContent) {
 
             posts.forEach(post => {
                 const postElement = document.createElement('div');
-                postElement.className = 'post';
+                postElement.id = `thread-${post.thread_id}`;
                 postElement.innerHTML = renderPostContent(post);
                 container.appendChild(postElement);
                 min_thread_id = Math.min(min_thread_id, post.thread_id);
@@ -35,15 +35,15 @@ function upgradeToFeedControl(container, url, options, renderPostContent) {
         const scrolled = container.scrollTop;
 
         if (scrolled >= scrollableHeight - 100 && !isFetching) {
-            fetchData();
+            fetchData().then(() => console.log('Fetched'));
         }
     });
 
-    fetchData();
+    await fetchData();
 }
 
 function threadPostContent(post) {
-    const { text, picture, created_at, nfollowers, nreplies, nlikes, is_following, display_name, username, avatar } = post;
+    const { thread_id, text, picture, created_at, nfollowers, nreplies, nlikes, is_following, display_name, username, avatar } = post;
 
 
     return `
@@ -58,17 +58,16 @@ function threadPostContent(post) {
         </div>
         <div class="card-content border border-0">
             <div class="card-header border-0 bg-white border-black rounded-0 p-0 "
-                onclick="javascript:window.location.href='./threadwithimage.html'">
+                onclick="javascript:window.location.href='/thread/${thread_id}'">
                 <div class="username-date d-flex justify-content-between">
                     <span>
                         <p class="fw-bold d-inline-block my-0">${display_name}</p>
                         <i class="bi bi-clock"></i>
                         <span>${new Date(created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                     </span>
-                    <i class="bi bi-three-dots"></i>
                 </div>
             </div>
-            <div class="card-body p-0" onclick="javascript:window.location.href='/thread'">
+            <div class="card-body p-0" onclick="javascript:window.location.href='/thread/${thread_id}'">
                 <div class="">${text}</div>
                 <div class="overflow-hidden rounded-2 border border-1 border-dark" style="margin-top: 8px;">
                     <img src="${picture}" alt="Image of thread" style="width: 100%;">
@@ -78,7 +77,7 @@ function threadPostContent(post) {
             <div class="card-footer bg-white border-top-0">
                 <p class="d-inline-block" data-bs-toggle="modal" data-bs-target="#replyThread"
                     onclick="getImageOfThread(event)"><i class="bi bi-chat-left-text"></i> ${nreplies} Replies</p>
-                <p class="d-inline-block"><i class="bi bi-heart"></i> ${nlikes} Likes</p>
+                <p class="d-inline-block" id="${"thread_id_" + thread_id}"><i class="bi bi-heart" onclick='like(${thread_id})'></i> ${nlikes} Likes</p>
             </div>
         </div>
 
