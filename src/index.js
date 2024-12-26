@@ -10,6 +10,7 @@ const session = require("express-session");
 const flash = require('express-flash');
 const passport = require('passport');
 const xssClean = require('xss-clean');
+const models = require('./models');
 //const helmet = require('helmet');
 
 // cấu hình giao thức
@@ -82,6 +83,20 @@ function checkNotAuthentication(req, res, next) {
     }
     next();
 }
+
+app.use((req, res, next) => {
+    if (!req.user) {
+        return next();
+    }
+    console.log(req.user);
+    models.User.findByPk(req.user).then(user => {
+        res.locals.user = user;
+        next();
+    }).catch(err => {
+        console.error(err);
+        res.status(400).send("Bad request");
+    });
+});
 
 app.set("view engine", "hbs");
 app.listen(port, () => console.log(`Example app listening on port ${port}`))

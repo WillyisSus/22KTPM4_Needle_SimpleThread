@@ -50,10 +50,10 @@ function threadPostContent(post) {
     <div class="thread-card d-flex flex-row">
         <div class="avatar-and-follow-icon">
             <a href="/profile/${username}">
-                <img src="${avatar?avatar:'/images/avatar.png'}" alt="avatar" class="border border-1 border-dark rounded-circle"
+                <img src="${avatar ? avatar : '/images/avatar.png'}" alt="avatar" class="border border-1 border-dark rounded-circle"
                     style="width: 36px; height:36px;">
             </a>
-            <i class="follow-icon-avatar bi bi-plus-circle ${is_following ? 'd-none' : ''}" data-bs-toggle="modal" data-bs-target="#followPopup"></i>
+            <i class="follow-icon-avatar bi bi-plus-circle ${is_following ? 'd-none' : ''}" data-bs-toggle="modal" data-bs-target="#followPopup${thread_id}"></i>
 
         </div>
         <div class="card-content border border-0">
@@ -70,19 +70,19 @@ function threadPostContent(post) {
             <div class="card-body p-0" onclick="javascript:window.location.href='/thread/${thread_id}'">
                 <div class="">${text}</div>
                 <div class="overflow-hidden rounded-2 border border-1 border-dark" 
-                    style="margin-top: 8px;  ${picture?'':'display: none;'}">
+                    style="margin-top: 8px;  ${picture ? '' : 'display: none;'}">
                     <img src="${picture}" alt="Image of thread" style="width: 100%;">
                 </div>
             </div>
 
             <div class="card-footer bg-white border-top-0">
-                <p class="d-inline-block" data-bs-toggle="modal" data-bs-target="#replyThread"
+                <p class="d-inline-block" data-bs-toggle="modal" data-bs-target="#replyThread${thread_id}"
                     onclick="getImageOfThread(event)"><i class="bi bi-chat-left-text"></i> ${nreplies} Replies</p>
                 <p class="d-inline-block" ><i class="bi ${have_liked ? "bi-heart-fill text-danger" : "bi-heart"}" onclick='like(${thread_id}, this)'></i> <span id="${"thread_id_" + thread_id}"> ${nlikes} Likes</span></p>
             </div>
         </div>
 
-        <div class="modal fade" id="followPopup" tabindex="-1" role="dialog" aria-labelledby="followPopup"
+        <div class="modal fade" id="followPopup${thread_id}" tabindex="-1" role="dialog" aria-labelledby="followPopup"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -101,7 +101,7 @@ function threadPostContent(post) {
                                     <p class="w-100 px-2">bio</p>
                                 </div>
                                 <div class="col-3">
-                                    <img src="${avatar?avatar:'/images/avatar.png'}" alt="user-avatar"
+                                    <img src="${avatar ? avatar : '/images/avatar.png'}" alt="user-avatar"
                                         class=" border border-1 border-dark rounded-circle w-100">
                                 </div>
                             </div>
@@ -120,7 +120,7 @@ function threadPostContent(post) {
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="replyThread" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+        <div class="modal fade" id="replyThread${thread_id}" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -136,7 +136,7 @@ function threadPostContent(post) {
                                 <div class="d-flex flex-row">
                                     <div class="avatar-is-replied">
                                         <div class="avatar-and-follow-icon ">
-                                            <img src="${avatar?avatar:'/images/avatar.png'}" alt="avatar"
+                                            <img src="${avatar ? avatar : '/images/avatar.png'}" alt="avatar"
                                                 class="border border-1 border-dark rounded-circle"
                                                 style="width: 36px; height:36px;">
                                             <i class="follow-icon-avatar bi bi-plus-circle ${is_following ? 'd-none' : ''}"></i>
@@ -157,7 +157,7 @@ function threadPostContent(post) {
                                         <div class="card-body p-0">
                                             <div class="">${text}</div>
                                             <div class="overflow-hidden rounded-2 border border-1 border-dark"
-                                                style="margin-top: 8px; ${picture?'':'display: none;'}">
+                                                style="margin-top: 8px; ${picture ? '' : 'display: none;'}">
                                                 <img src="${picture}" alt="Image of thread" style="width: 100%;">
                                             </div>
                                         </div>
