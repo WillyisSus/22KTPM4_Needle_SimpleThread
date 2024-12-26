@@ -1,6 +1,6 @@
 <div id="thread-display-section">
-    <div class="thread-container">
-        <div class="profile-container" style="padding: 20px;">
+    <div class="thread-container" id="cur-profile-thread-container">
+        <div class="profile-container" style="padding: 20px 20px 0px 20px;">
             <div class="d-flex flex-row justify-content-between" style="margin-bottom:10px">
                 <div>
                     <h4><b>{{user.display_name}}</b></h4>
@@ -35,113 +35,103 @@
             <!-- Threads -->
 
 
-            {{>needle-your-thread}}
-            {{>thread-card}}
-            {{>thread-card}}
-            {{>thread-card}}
-            {{>thread-card}}
 
 
-            <!-- Modal for 'follow-' -->
-            <div class="modal fade" id="followModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="row">
-                            <div id="followersCol" class="d-flex flex-column justify-content-center col"
-                                style="font-weight: bold;">
-                                <div style="text-align: center;">Followers</div>
-
-                                <div style="text-align: center; border-bottom: 2px solid;">{{user.nFollowers}}</div>
-
-                            </div>
-
-                            <div id="followingCol" class="d-flex flex-column justify-content-center col">
-                                <div style="text-align: center;">Following</div>
-
-                                <div style="text-align: center; border-bottom: 2px solid;">{{user.nFollowings}}</div>
-
-                            </div>
 
 
-                        </div>
-                        <div id="followerModalBody" class="modal-body overflow-scroll d-flex flex-column gap-2"
-                            style="max-height: 500px;">
-                            {{#each followers}}
-                            {{>modal-body-followers}}
-                            {{/each}}
-                        </div>
-                        <div id="followingModalBody" class="modal-body overflow-scroll d-flex flex-column gap-2 d-none"
-                            style="max-height: 500px;">
-                            {{#each followings}}
-                            {{>modal-body-following}}
-                            {{/each}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal for 'edit-profile' -->
-            <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Updating Profile</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form class="d-flex flex-column gap-2" id="editProfileForm" onsubmit="editUser(event)">
-                                <div class="form-group">
-                                    <label for="Name"><b>Name</b></label>
-                                    <input id="Name" class="form-control" name="display_name"
-                                        value="{{user.display_name}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="bio"><b>Bio</b></label>
-                                    <input id="bio" class="form-control" name="bio" value="{{user.bio}}">
-                                </div>
-                                <div class="m-2 d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-dark">Save changes</button>
-                                </div>
-                            </form>
+        </div>
+        {{>needle-your-thread}}
+    </div>
+    <!-- Modal for 'follow-' -->
+    <div class="modal fade" id="followModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="row">
+                    <div id="followersCol" class="d-flex flex-column justify-content-center col"
+                        style="font-weight: bold;">
+                        <div style="text-align: center;">Followers</div>
 
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal for 'change-avatar' -->
-            <div class="modal fade" id="changeAvatar" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-
-                    <div class="modal-content p-2">
-                        <div class="modal-header justify-content-center" style="text-align: center;">
-                            <img id="changeAvatarImage" alt="avatar" class="border border-1 border-dark rounded-circle"
-                                style="width: 56px; height:56px;">
-                        </div>
-
-                        <div class="modal-body d-flex flex-column gap-2">
-                            <label class="btn btn-outline-dark">From Device
-                                <input id="pickedPicture" type="file" class="required d-none"
-                                    onchange="pickPicture(event)"></input>
-                            </label>
-
-                            <button type="submit" class="btn btn-outline-danger" onclick="removeAvatar()">Remove
-                                Avatar</button>
-
-                        </div>
-                        <div class="modal-footer flex-column justify-content-center">
-                            <p class="text-danger" id="saveAvatarError"></p>
-                            <button type="submit" class="btn btn-dark" onclick="saveAvatarChange()">Save
-                                changes</button>
-                        </div>
+                        <div style="text-align: center; border-bottom: 2px solid;">{{user.nFollowers}}</div>
 
                     </div>
 
+                    <div id="followingCol" class="d-flex flex-column justify-content-center col">
+                        <div style="text-align: center;">Following</div>
+
+                        <div style="text-align: center; border-bottom: 2px solid;">{{user.nFollowings}}</div>
+
+                    </div>
+
+
+                </div>
+                <div id="followerModalBody" class="modal-body overflow-scroll d-flex flex-column gap-2"
+                    style="max-height: 500px;">
+                    <!-- content -->
+                </div>
+                <div id="followingModalBody" class="modal-body overflow-scroll d-flex flex-column gap-2 d-none"
+                    style="max-height: 500px;">
+                    <!-- content -->
                 </div>
             </div>
+        </div>
+    </div>
+    <!-- Modal for 'edit-profile' -->
+    <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Updating Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="d-flex flex-column gap-2" id="editProfileForm" onsubmit="editUser(event)">
+                        <div class="form-group">
+                            <label for="Name"><b>Name</b></label>
+                            <input id="Name" class="form-control" name="display_name" value="{{user.display_name}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="bio"><b>Bio</b></label>
+                            <input id="bio" class="form-control" name="bio" value="{{user.bio}}">
+                        </div>
+                        <div class="m-2 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-dark">Save changes</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for 'change-avatar' -->
+    <div class="modal fade" id="changeAvatar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+
+            <div class="modal-content p-2">
+                <div class="modal-header justify-content-center" style="text-align: center;">
+                    <img id="changeAvatarImage" alt="avatar" class="border border-1 border-dark rounded-circle"
+                        style="width: 56px; height:56px;">
+                </div>
+
+                <div class="modal-body d-flex flex-column gap-2">
+                    <label class="btn btn-outline-dark">From Device
+                        <input id="pickedPicture" type="file" class="required d-none"
+                            onchange="pickPicture(event)"></input>
+                    </label>
+
+                    <button type="submit" class="btn btn-outline-danger" onclick="removeAvatar()">Remove
+                        Avatar</button>
+
+                </div>
+                <div class="modal-footer flex-column justify-content-center">
+                    <p class="text-danger" id="saveAvatarError"></p>
+                    <button type="submit" class="btn btn-dark" onclick="saveAvatarChange()">Save
+                        changes</button>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </div>

@@ -12,6 +12,12 @@ controller.show = async (req, res) => {
             }
         });
 
+        const session_user = await models.User.findByPk(session_user_id);
+
+        if (session_user.username === user.username) {
+            return res.redirect("/cur-profile");
+        }
+
         const nFollowers = await models.FollowingFollower.count({
             where: {
                 followee_id: user.user_id

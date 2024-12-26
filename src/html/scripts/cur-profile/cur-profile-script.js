@@ -118,3 +118,112 @@ async function saveAvatarChange() {
     }
 }
 
+// Follow Modal
+
+let currentPageFollowers = 0;
+let isFetchingFollowers = false;
+
+let currentPageFollowing = 0;
+let isFetchingFollowing = false;
+
+async function fetchFollowers(page = 0) {
+    if (isFetchingFollowers) return;
+    isFetchingFollowers = true;
+
+    try {
+        const response = await fetch(`/cur-profile/followers?page=${page}`);
+        const posts = await response.json();
+
+        posts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.className = 'post';
+            postElement.innerHTML =
+                `<div class="d-flex justify-content-between">
+                <div class="d-flex gap-3">
+                    <img src="${post.avatar}" alt="avatar" class="border border-1 border-dark rounded-circle"
+                        style="width: 36px; height:36px;">
+                        <div class="d-flex flex-column">
+                            <div><b>${post.display_name}</b></div>
+                            <div>${post.username}</div>
+                        </div>
+                </div>
+            </div>`;
+            followerModalBody.appendChild(postElement);
+        });
+
+        isFetchingFollowers = false;
+    } catch (error) {
+        console.error('Error fetching feed:', error);
+        isFetchingFollowers = false;
+    }
+}
+
+
+async function fetchFollowees(page = 0) {
+    if (isFetchingFollowing) return;
+    isFetchingFollowing = true;
+
+    try {
+        const response = await fetch(`/cur-profile/followees?page=${page}`);
+        const posts = await response.json();
+
+
+        posts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.className = 'post';
+            postElement.innerHTML =
+                `<div class="d-flex justify-content-between">
+                    <div class="d-flex gap-3">
+                        <img src="${post.avatar}" alt="avatar" class="border border-1 border-dark rounded-circle"
+                            style="width: 36px; height:36px;">
+                            <div class="d-flex flex-column">
+                                <div><b>${post.display_name}</b></div>
+                                <div>${post.username}</div>
+                            </div>
+                    </div>
+
+                    <button type="button" data-username="${post.username}" class="btn btn-outline-dark col-3"
+                        onclick="followClicked(this)">Unfollow</button>
+
+
+                </div>`;
+            followingModalBody.appendChild(postElement);
+        });
+
+        isFetchingFollowing = false;
+    } catch (error) {
+        console.error('Error fetching feed:', error);
+        isFetchingFollowing = false;
+    }
+}
+
+function setupInfiniteScroll() {
+    followerModalBody.addEventListener('scroll', () => {
+        const scrollableHeight = followerModalBody.scrollHeight - followerModalBody.clientHeight;
+        const scrolled = followerModalBody.scrollTop;
+
+        if (scrolled >= scrollableHeight - 100 && !isFetchingFollowers) {
+            currentPageFollowers++;
+            fetchFollowers(currentPageFollowers);
+        }
+    });
+
+    followingModalBody.addEventListener('scroll', () => {
+        const scrollableHeight = followingModalBody.scrollHeight - followingModalBody.clientHeight;
+        const scrolled = followingModalBody.scrollTop;
+
+        if (scrolled >= scrollableHeight - 100 && !isFetchingFollowing) {
+            currentPageFollowing++;
+            fetchFollowees(currentPageFollowing);
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchFollowers();
+    fetchFollowees();
+    setupInfiniteScroll();
+});
+
+
+
