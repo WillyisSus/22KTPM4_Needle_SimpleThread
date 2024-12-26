@@ -43,7 +43,7 @@ function upgradeToFeedControl(container, url, options, renderPostContent) {
 }
 
 function threadPostContent(post) {
-    const { creator_user, text, picture, created_at, nReplies, nLikes, isFollowing, display_name, username, avatar } = post;
+    const { text, picture, created_at, nfollowers, nreplies, nlikes, is_following, display_name, username, avatar } = post;
 
 
     return `
@@ -53,7 +53,7 @@ function threadPostContent(post) {
                 <img src="${avatar}" alt="avatar" class="border border-1 border-dark rounded-circle"
                     style="width: 36px; height:36px;">
             </a>
-            <i class="follow-icon-avatar bi bi-plus-circle ${isFollowing ? 'd-none' : ''}" data-bs-toggle="modal" data-bs-target="#followPopup"></i>
+            <i class="follow-icon-avatar bi bi-plus-circle ${is_following ? 'd-none' : ''}" data-bs-toggle="modal" data-bs-target="#followPopup"></i>
 
         </div>
         <div class="card-content border border-0">
@@ -77,8 +77,8 @@ function threadPostContent(post) {
 
             <div class="card-footer bg-white border-top-0">
                 <p class="d-inline-block" data-bs-toggle="modal" data-bs-target="#replyThread"
-                    onclick="getImageOfThread(event)"><i class="bi bi-chat-left-text"></i> Replies</p>
-                <p class="d-inline-block"><i class="bi bi-heart"></i> Likes</p>
+                    onclick="getImageOfThread(event)"><i class="bi bi-chat-left-text"></i> ${nreplies} Replies</p>
+                <p class="d-inline-block"><i class="bi bi-heart"></i> ${nlikes} Likes</p>
             </div>
         </div>
 
@@ -96,19 +96,19 @@ function threadPostContent(post) {
                         <div class="container-fluid d-grid">
                             <div class="row">
                                 <div class="col-9">
-                                    <h4>Displayname</h4>
-                                    <h6 class="fw-light">@username</h6>
+                                    <h4>${display_name}</h4>
+                                    <h6 class="fw-light">@${username}</h6>
                                     <p class="w-100 px-2">bio</p>
                                 </div>
                                 <div class="col-3">
-                                    <img src="/images/avatar.png" alt="user-avatar"
+                                    <img src="${avatar}" alt="user-avatar"
                                         class=" border border-1 border-dark rounded-circle w-100">
                                 </div>
                             </div>
                             <div class="row">
-                                <p class="py-2">9,999 followers</p>
-                                <button class="btn btn-dark" onclick="changeFollowStatus(event)">follow
-                                    @username</button>
+                                <p class="py-2">${nfollowers} followers</p>
+                                <button class="btn btn-dark" data-username="${username}" onclick="followClicked(this)">Follow
+                                    @${username}</button>
                             </div>
                         </div>
                     </div>

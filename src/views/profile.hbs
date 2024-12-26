@@ -1,5 +1,5 @@
 <div id="thread-display-section">
-    <div class="thread-container">
+    <div class="thread-container" data-user-id="{{user.user_id}}" id="profile-thread-container">
         <div class="profile-container" style="padding: 20px;">
             <div class="d-flex flex-row justify-content-between" style="margin-bottom:10px">
                 <div>
@@ -40,15 +40,13 @@
                 Threads of @{{user.username}}
             </div>
 
-            {{>thread-card}}
-            {{>thread-card}}
-            {{>thread-card}}
-            {{>thread-card}}
+
 
 
 
 
 
         </div>
+
     </div>
 </div>
