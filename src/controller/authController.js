@@ -199,38 +199,38 @@ controller.sendForgotPasswordForm = async (req, res) => {
                 }}
                 
             });
-            if (user){
-                if (user.email.search("%") != -1){
-                    console.log("Not verify")
-                    res.render('forgotpw', {layout: "logged-out-layout", message: "Your email is not verified, please verify it first ", emailNotSent:true,})
-                }else{
-                    var sign = jwt.sign({data: user.email}, process.env.CRYPTO_PASSWORD, {expiresIn: '5m'})
-                    const protocol = req.protocol;
-                    const host = req.hostname;
-                    const port = 3000;
-                    const fullUrl = `${protocol}://${host}:${port}/auth/forgot-password/${sign}`
-                    transporter.sendMail({
-                        from: {
-                            name: 'Needle - Simple Thread',
-                            address: process.env.APP_EMAIl,
-                        },
-                        to: user.email,
-                        subject: "[Needle - Simple Thread] Reset your password",
-                        text: "Plaintext version of the message",
-                        html: `<div><span style="color:#FF0000">Please ignore this email if you did not request this.</span> Follow this link to reset your password, or it will be canceled after 5 minutes: 
-                                    <a href="${fullUrl}">To reset your password</a></div>`,
-                    })
-                    res.render('forgotpw', {layout: "logged-out-layout", emailNotSent: false})
-                }
-            }else{
-                return res.render('forgotpw', {layout: "logged-out-layout", emailNotSent:true, message: "Cannot find Username or Email"})
-            }
         } else {
             user = await models.User.findOne({ where: 
                 { [Op.or]:
-                    {username: Email,
-                        email: Email
+                    {username: UsernameOrEmail,
+                        email: UsernameOrEmail
                     }}});
+        }
+        if (user){
+            if (user.email.search("%") != -1){
+                console.log("Not verify")
+                res.render('forgotpw', {layout: "logged-out-layout", message: "Your email is not verified, please verify it first ", emailNotSent:true,})
+            }else{
+                var sign = jwt.sign({data: user.email}, process.env.CRYPTO_PASSWORD, {expiresIn: '5m'})
+                const protocol = req.protocol;
+                const host = req.hostname;
+                const port = 3000;
+                const fullUrl = `${protocol}://${host}:${port}/auth/forgot-password/${sign}`
+                transporter.sendMail({
+                    from: {
+                        name: 'Needle - Simple Thread',
+                        address: process.env.APP_EMAIl,
+                    },
+                    to: user.email,
+                    subject: "[Needle - Simple Thread] Reset your password",
+                    text: "Plaintext version of the message",
+                    html: `<div><span style="color:#FF0000">Please ignore this email if you did not request this.</span> Follow this link to reset your password, or it will be canceled after 5 minutes: 
+                                <a href="${fullUrl}">To reset your password</a></div>`,
+                })
+                res.render('forgotpw', {layout: "logged-out-layout", emailNotSent: false})
+            }
+        }else{
+            return res.render('forgotpw', {layout: "logged-out-layout", emailNotSent:true, message: "Cannot find Username or Email"})
         }
     }
     
