@@ -52,7 +52,7 @@ Handlebars.registerHelper('ifs', function (value, options) {
     }
 });
 Handlebars.registerHelper('ifn', function (value, options) {
-    if (value === "new") {
+    if (value === "seen") {
         return options.fn(this);
     }
 });
