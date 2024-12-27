@@ -16,7 +16,7 @@
     "production": {
         "username": "ptudw_crud_exercise_user",
         "password": "PdNt9L1tFeLkhRDh3h9eptzZX2O1Xg6h",
-        "database": "database_production",
+        "database": "weeb_proj",
         "host": "dpg-cthquqaj1k6c739g69ng-a",
         "dialect": "postgres",
         "pool": {
