@@ -154,14 +154,12 @@ controller.getReplies = async (req, res) => {
             type: QueryTypes.SELECT
         });
 
-        if (min_thread_id === 0 && max_thread_id === 0) {
+        if (min_thread_id === 1000000000 && max_thread_id === 0) {
             threads.unshift(...await models.sequelize.query(buildThreadQuery(false, false, false, true), {
                 replacements: { min_thread_id, max_thread_id, session_user_id, thread_id, session_user_avatar: res.locals.user.avatar },
                 type: QueryTypes.SELECT
             }));
         }
-
-
 
 
         console.log(min_thread_id, max_thread_id);
