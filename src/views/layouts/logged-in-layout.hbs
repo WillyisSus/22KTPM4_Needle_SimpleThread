@@ -78,25 +78,25 @@
             </a>
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link active nav-current" href="/home-feed" aria-current="page"><i
+                    <a class="nav-link active {{#if homeFeed}} nav-current {{/if}}" href="/home-feed" aria-current="page"><i
                             class="bi bi-house-door-fill"></i>
                         <span>Home</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/search" aria-current="page"><i class="bi bi-search"></i>
+                    <a class="nav-link active {{#if searchPage}} nav-current {{/if}}" href="/search" aria-current="page"><i class="bi bi-search"></i>
                         <span>Search</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="" data-bs-toggle="modal" data-bs-target="#postThread"
+                    <a class="nav-link active " href="" data-bs-toggle="modal" data-bs-target="#postThread"
                         aria-current="page"><i class="bi bi-plus-lg"></i>
                         <span>Post</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/notifications" aria-current="page"><i class="bi bi-bell-fill"></i>
+                    <a class="nav-link active {{#if notiPage}} nav-current {{/if}}" href="/notifications" aria-current="page"><i class="bi bi-bell-fill"></i>
                         <span>Notification</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/cur-profile" aria-current="page"><i
+                    <a class="nav-link active {{#if profilePage}} nav-current {{/if}}" href="/cur-profile" aria-current="page"><i
                             class="bi bi-person-circle"></i>
                         <span>Profile</span></a>
                 </li>

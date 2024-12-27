@@ -103,11 +103,11 @@ app.use((req, res, next) => {
 app.set("view engine", "hbs");
 app.listen(port, () => console.log(`Example app listening on port ${port}`))
 app.use("/thread", checkAuthentication, require('./router/threadRouter'))
-app.get("/", checkAuthentication, (req, res) => res.render("home-feed"));
+app.get("/", checkAuthentication, (req, res) => res.redirect("/for-you-page"));
 app.get("/home-feed", checkAuthentication, (req, res) => {
-    res.render("home-feed")
+    res.render("home-feed", {homeFeed:true})
 });
-app.get("/for-you-page", checkAuthentication, (req, res) => res.render("for-you-page"));
+app.get("/for-you-page", checkAuthentication, (req, res) => res.render("for-you-page", {homeFeed:true}));
 
 app.use("/cur-profile", checkAuthentication, require("./router/curProfileRouter.js"));
 app.use("/profile", checkAuthentication, require("./router/profileRouter.js"));

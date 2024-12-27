@@ -46,7 +46,7 @@ controller.show = async (req, res) => {
 
         res.locals.user = user;
 
-        res.render("cur-profile");
+        res.render("cur-profile", {profilePage:true});
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server error");

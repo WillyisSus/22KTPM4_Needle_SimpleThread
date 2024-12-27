@@ -64,7 +64,7 @@ controller.showNotif = async (req, res) => {
     notif.forEach(notifs => {Object.defineProperty(notifs, 'notif_name', {value: notiflist.find(notiflist => notiflist.status_id === notifs.notif_id).status_name, writable: true})});
 
     res.locals.notif = notif;
-    res.render('notifications');
+    res.render('notifications', {notiPage: true});
 }
 
 controller.markRead = async (req, res) => {

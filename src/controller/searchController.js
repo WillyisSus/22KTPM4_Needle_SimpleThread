@@ -29,7 +29,7 @@ controller.showSearchPage = async (req, res) => {
     user_list.forEach(users => {Object.defineProperty(users, 'is_followed', {value: follow_list.find(follow => follow.followee_id === users.user_id) ? true : false, writable: true})});
 
     res.locals.user = user_list;
-    res.render("search");
+    res.render("search", {searchPage:true});
 }
 
 module.exports = controller;
