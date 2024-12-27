@@ -43,9 +43,8 @@ async function editUser(e) {
         }
         const resText = await res.text();
         throw new Error(resText);
-
     } catch (error) {
-        // document.querySelector("#errorMessageEdit").innerText = error.message;
+        document.getElementById('saveInfoError').innerText = error.message;
         console.error(error);
     }
 }
