@@ -24,13 +24,15 @@ p{
  
 .thread-card .card-content{
     padding: 8px; 
-    width: 100%;
+    width: 90%;
 }
 
 .thread-card .card-body{
     margin: 8px 0;
 }
-
+.thread-card .card-body div{
+    word-wrap: break-word;
+}
 .thread-card .card-body:hover, .thread-card .card-header{
     cursor: pointer;
 }

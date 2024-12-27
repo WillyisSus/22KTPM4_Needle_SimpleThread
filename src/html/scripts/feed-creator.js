@@ -1,6 +1,6 @@
 async function upgradeToFeedControl(container, url, options, renderPostContent) {
     let isFetching = false;
-    let min_thread_id = 0;
+    let min_thread_id = 1000000000;
     let max_thread_id = 0;
 
     async function fetchData() {
@@ -43,7 +43,7 @@ async function upgradeToFeedControl(container, url, options, renderPostContent) 
 }
 
 function threadPostContent(post) {
-    const { thread_id, text, picture, created_at, nfollowers, nreplies, nlikes, is_following, display_name, username, avatar, have_liked } = post;
+    const { thread_id, text, picture, created_at, nfollowers, nreplies, nlikes, is_following, display_name, username, avatar, have_liked, cur_user_avatar } = post;
 
 
     return `
@@ -63,7 +63,9 @@ function threadPostContent(post) {
                     <span>
                         <p class="fw-bold d-inline-block my-0">${username}</p>
                         <i class="bi bi-clock"></i>
-                        <span>${new Date(created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                        <span>${(new Date(created_at)).toLocaleDateString() == (new Date(Date.now())).toLocaleDateString() ? 
+                            new Date(created_at).toLocaleTimeString('en-GB') 
+                            :new Date(created_at).toLocaleString('en-GB')}</span>
                     </span>
                 </div>
             </div>
@@ -166,7 +168,7 @@ function threadPostContent(post) {
                                 </div>
                                 <div class="d-flex flex-row">
                                     <div class="avatar-and-follow-icon">
-                                        <img src="/images/avatar.png" alt="avatar"
+                                        <img src="${cur_user_avatar}" alt="avatar"
                                             class="border border-1 border-dark rounded-circle"
                                             style="width: 36px; height:36px;">
                                     </div>

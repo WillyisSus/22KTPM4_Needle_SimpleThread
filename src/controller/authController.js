@@ -56,7 +56,7 @@ controller.getSignup = async (req, res) => {
         const protocol = req.protocol;
         const host = req.hostname;
         const port = 3000;
-        const fullUrl = `${protocol}://${host}:${port}/auth/verify-email/${sign}`
+        const fullUrl = `${protocol}://${host}${process.env.NODE_ENV=="production"?"":":" + port}/auth/verify-email/${sign}`
         await transporter.sendMail({
             from: {
                 name: 'Needle - Simple Thread',
@@ -118,7 +118,7 @@ controller.sendVerifyEmail = async (req, res, next) => {
             const protocol = req.protocol;
             const host = req.hostname;
             const port = 3000;
-            const fullUrl = `${protocol}://${host}:${port}/auth/verify-email/${sign}`
+            const fullUrl = `${protocol}://${host}${process.env.NODE_ENV=="production"?"":":" + port}/auth/verify-email/${sign}`
             await transporter.sendMail({
                 from: {
                     name: 'Needle - Simple Thread',

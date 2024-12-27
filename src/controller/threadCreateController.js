@@ -38,7 +38,9 @@ function buildThreadQuery(only_following, is_creator_specified, is_thread_parent
                 WHEN "like".USER_ID = :session_user_id THEN 1
                 ELSE 0
             END
-        ) > 0 AS HAVE_LIKED
+        ) > 0 AS HAVE_LIKED,
+        :session_user_avatar AS CUR_USER_AVATAR
+        
     FROM
         PUBLIC.THREAD THREAD
         JOIN PUBLIC."user" "user" ON THREAD.CREATOR = "user".USER_ID
@@ -73,11 +75,11 @@ function buildThreadQuery(only_following, is_creator_specified, is_thread_parent
 controller.getCurrentUserThreads = async (req, res) => {
     try {
         const session_user_id = await req.user;
-        const min_thread_id = parseInt(req.query.min_thread_id) || 0;
+        const min_thread_id = parseInt(req.query.min_thread_id) || 1000000000;
         const max_thread_id = parseInt(req.query.max_thread_id) || 0;
 
         let threads = await models.sequelize.query(buildThreadQuery(false, true), {
-            replacements: { min_thread_id, max_thread_id, session_user_id, thread_creator: session_user_id },
+            replacements: { min_thread_id, max_thread_id, session_user_id, thread_creator: session_user_id, session_user_avatar: res.locals.user.avatar },
             type: QueryTypes.SELECT
         });
 
@@ -95,11 +97,11 @@ controller.getUserThreads = async (req, res) => {
     try {
         const session_user_id = await req.user;
         const user_id = req.params.user_id;
-        const min_thread_id = parseInt(req.query.min_thread_id) || 0;
+        const min_thread_id = parseInt(req.query.min_thread_id) || 1000000000;
         const max_thread_id = parseInt(req.query.max_thread_id) || 0;
 
         let threads = await models.sequelize.query(buildThreadQuery(false, true), {
-            replacements: { min_thread_id, max_thread_id, session_user_id, thread_creator: user_id },
+            replacements: { min_thread_id, max_thread_id, session_user_id, thread_creator: user_id, session_user_avatar: res.locals.user.avatar },
             type: QueryTypes.SELECT
         });
 
@@ -117,13 +119,13 @@ controller.getUserThreads = async (req, res) => {
 controller.getFeedThreads = async (req, res) => {
     try {
         const session_user_id = await req.user;
-        const min_thread_id = parseInt(req.query.min_thread_id) || 0;
+        const min_thread_id = parseInt(req.query.min_thread_id) || 1000000000;
         const max_thread_id = parseInt(req.query.max_thread_id) || 0;
         const page = req.query.page || 0;
         const only_following = req.query.only_following === "true";
 
         let threads = await models.sequelize.query(buildThreadQuery(only_following, false), {
-            replacements: { min_thread_id, max_thread_id, session_user_id },
+            replacements: { min_thread_id, max_thread_id, session_user_id, session_user_avatar: res.locals.user.avatar },
             type: QueryTypes.SELECT
         });
 
@@ -141,25 +143,23 @@ controller.getFeedThreads = async (req, res) => {
 controller.getReplies = async (req, res) => {
     try {
         const session_user_id = await req.user;
-        const min_thread_id = parseInt(req.query.min_thread_id) || 0;
+        const min_thread_id = parseInt(req.query.min_thread_id) || 1000000000;
         const max_thread_id = parseInt(req.query.max_thread_id) || 0;
         const thread_id = req.params.thread_id;
 
 
 
         let threads = await models.sequelize.query(buildThreadQuery(false, false, true), {
-            replacements: { min_thread_id, max_thread_id, session_user_id, thread_parent: thread_id },
+            replacements: { min_thread_id, max_thread_id, session_user_id, thread_parent: thread_id, session_user_avatar: res.locals.user.avatar },
             type: QueryTypes.SELECT
         });
 
-        if (min_thread_id === 0 && max_thread_id === 0) {
+        if (min_thread_id === 1000000000 && max_thread_id === 0) {
             threads.unshift(...await models.sequelize.query(buildThreadQuery(false, false, false, true), {
-                replacements: { min_thread_id, max_thread_id, session_user_id, thread_id },
+                replacements: { min_thread_id, max_thread_id, session_user_id, thread_id, session_user_avatar: res.locals.user.avatar },
                 type: QueryTypes.SELECT
             }));
         }
-
-
 
 
         console.log(min_thread_id, max_thread_id);
