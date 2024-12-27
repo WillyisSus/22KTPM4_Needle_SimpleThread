@@ -107,9 +107,11 @@ async function sendPostThreadData(event){
             })
         });
         if (res.status == 200){
-            location.reload()
+            const newURL = await res.text();
+            location.replace(newURL)
+        }else{
+            console.log("Something bad happened")
         }
-        console.log(res);
         
     } catch (error) {
         console.log(error);
@@ -137,7 +139,8 @@ async function postAThreadReply(event) {
                 })
             })
             if (res.status == 200){
-                location.reload()
+                const newURL = await res.text();
+                location.replace(newURL)
             }else{
                 console.log('something bad happen')
             }

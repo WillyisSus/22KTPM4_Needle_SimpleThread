@@ -179,7 +179,7 @@ controller.postNewThread = async (req, res) => {
     const { text, picture, created_at, parent_thread, comment_notif_status } = req.body
     console.log(text)
     try {
-        await models.Thread.create({
+        const thread = await models.Thread.create({
             text: text,
             picture: (picture ? process.env.IMAGE_SERVER + picture : null),
             created_at: created_at,
@@ -187,7 +187,9 @@ controller.postNewThread = async (req, res) => {
             parent_thread: parent_thread,
             comment_notif_status: comment_notif_status
         })
-        res.status(200).send("created")
+        if (thread) {
+            return res.status(200).send("/thread/" + thread.thread_id);
+        }
 
     } catch (error) {
         console.log(error)
@@ -209,9 +211,9 @@ controller.postThreadReply = async (req, res) => {
             comment_notif_status: notif_status.status_id,
         })
         if (reply) {
-            res.status(200).send("/thread/" + reply.thread_id);
+            return res.status(200).send("/thread/" + parent_thread);
         } else {
-            res.status(500).send('Something bad happened')
+            return res.status(500).send('Something bad happened')
         }
     } catch (error) {
         res.status(500).send('Some thing bad happen')
