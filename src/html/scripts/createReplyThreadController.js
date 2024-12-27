@@ -77,7 +77,8 @@ async function sendPostThreadData(event){
     event.preventDefault();
     try {
         const formData = new FormData();
-        const text =  document.getElementById("create-thread-body").value
+        var text = "";
+        text = document.getElementById("create-thread-body").value
         console.log(text)
         const file = document.getElementById("thread-image")
         var filePath = null;
@@ -93,24 +94,28 @@ async function sendPostThreadData(event){
                 console.log(filePath)
             }
         }
-        const res = await fetch('/thread/post', {
-            method: 'POST',
-            headers: {
-                "Content-type":"application/json"
-              },
-            body: JSON.stringify({
-                text: text,
-                picture: filePath,
-                created_at: Date.now(),
-                parent_thread: null,
-                comment_notif_status: null    
-            })
-        });
-        if (res.status == 200){
-            const newURL = await res.text();
-            location.replace(newURL)
-        }else{
-            console.log("Something bad happened")
+        console.log(text)
+        if (filePath != null || text.length > 0){
+            const res = await fetch('/thread/post', {
+                method: 'POST',
+                headers: {
+                    "Content-type":"application/json"
+                  },
+                body: JSON.stringify({
+                    text: text,
+                    picture: filePath,
+                    created_at: Date.now(),
+                    parent_thread: null,
+                    comment_notif_status: null    
+                })
+            });
+            if (res.status == 200){
+                const newURL = await res.text();
+                clearThreadForm();
+                location.href = newURL
+            }else{
+                console.log("Something bad happened")
+            }
         }
         
     } catch (error) {
@@ -140,7 +145,8 @@ async function postAThreadReply(event) {
             })
             if (res.status == 200){
                 const newURL = await res.text();
-                location.replace(newURL)
+                clearThreadForm();
+                location.href = newURL
             }else{
                 console.log('something bad happen')
             }
