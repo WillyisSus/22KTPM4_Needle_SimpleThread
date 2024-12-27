@@ -4,13 +4,14 @@
 
 .thread-container {
     width: 100%;
-    min-width: 390px;
+    min-width: 624px;
     max-width: 624px;
     background-color: white;
     flex-grow: 1;
     margin: 0 auto;
     border: solid 1px #aeaeae;
     border-radius: 16px;
+    margin: 8px 0;
     overflow-x: hidden;
     overflow-y: scroll;
     scroll-behavior: smooth;
@@ -121,7 +122,9 @@
     transform: translateX(-80%);
     background-color: #aeaeae;
 }
-
+div.notification-card.d-flex.flex-row{
+    min-width: 600px;
+}
 @media only screen and (max-width:760px) {
 
     .thread-container {
@@ -135,6 +138,7 @@
         overflow-x: hidden;
         overflow-y: scroll;
         scroll-behavior: smooth;
+        margin: 0;
     }
 
     .thread-container::-webkit-scrollbar {

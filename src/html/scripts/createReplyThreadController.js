@@ -105,7 +105,10 @@ async function sendPostThreadData(event){
                 parent_thread: null,
                 comment_notif_status: null    
             })
-        }).then(data => data.json())
+        });
+        if (res.status == 200){
+            location.reload()
+        }
         console.log(res);
         
     } catch (error) {
@@ -134,7 +137,7 @@ async function postAThreadReply(event) {
                 })
             })
             if (res.status == 200){
-                console.log('yes')
+                location.reload()
             }else{
                 console.log('something bad happen')
             }

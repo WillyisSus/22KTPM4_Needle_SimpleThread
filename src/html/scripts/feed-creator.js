@@ -70,7 +70,7 @@ function threadPostContent(post) {
             <div class="card-body p-0" onclick="javascript:window.location.href='/thread/${thread_id}'">
                 <div class="">${text}</div>
                 <div class="overflow-hidden rounded-2 border border-1 border-dark" 
-                    style="margin-top: 8px;  ${picture ? '' : 'display: none;'}">
+                    style="margin-top: 8px;  ${picture != null ? '' : 'display: none;'}">
                     <img src="${picture}" alt="Image of thread" style="width: 100%;">
                 </div>
             </div>
