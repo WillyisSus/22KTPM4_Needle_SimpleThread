@@ -61,7 +61,7 @@ function threadPostContent(post) {
                 onclick="javascript:window.location.href='/thread/${thread_id}'">
                 <div class="username-date d-flex justify-content-between">
                     <span>
-                        <p class="fw-bold d-inline-block my-0">${display_name}</p>
+                        <p class="fw-bold d-inline-block my-0">${username}</p>
                         <i class="bi bi-clock"></i>
                         <span>${new Date(created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                     </span>

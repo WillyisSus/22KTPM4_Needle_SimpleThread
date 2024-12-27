@@ -60,7 +60,7 @@ controller.put = async (req, res) => {
 
         const { username, bio, avatar } = req.body;
         console.log(username);
-        if (username) {
+        if (username && username !== user.username) {
 
             if (!new RegExp(/^[a-zA-Z0-9]{6,32}$/, "i").exec(username)) {
                 res.status(400).send("Username must be between 6 to 32 characters and contain only letters and numbers.");
