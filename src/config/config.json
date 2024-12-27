@@ -1,7 +1,7 @@
 {
     "development": {
         "username": "postgres",
-        "password": "01082004",
+        "password": "986532",
         "database": "weeb_proj",
         "host": "127.0.0.1",
         "dialect": "postgres"
@@ -14,10 +14,22 @@
         "dialect": "mysql"
     },
     "production": {
-        "username": "root",
-        "password": null,
-        "database": "database_production",
-        "host": "127.0.0.1",
-        "dialect": "mysql"
+        "username": "ptudw_crud_exercise_user",
+        "password": "PdNt9L1tFeLkhRDh3h9eptzZX2O1Xg6h",
+        "database": "weeb_proj",
+        "host": "dpg-cthquqaj1k6c739g69ng-a",
+        "dialect": "postgres",
+        "pool": {
+            "max": 5,
+            "min": 0,
+            "acquire": 30000,
+            "idle": 10000
+        },
+        "dialectOptions": {
+            "ssl": {
+                "require": true,
+                "rejectUnauthorized": false
+            }
+        }
     }
 }

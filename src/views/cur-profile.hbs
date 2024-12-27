@@ -83,16 +83,18 @@
                     <h5 class="modal-title" id="exampleModalLabel">Updating Profile</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body flex-column">
                     <form class="d-flex flex-column gap-2" id="editProfileForm" onsubmit="editUser(event)">
                         <div class="form-group">
-                            <label for="Name"><b>Name</b></label>
-                            <input id="Name" class="form-control" name="display_name" value="{{user.display_name}}">
+                            <label for="Name"><b>Username</b></label>
+                            <input id="Name" class="form-control" name="username" value="{{user.username}}">
                         </div>
                         <div class="form-group">
                             <label for="bio"><b>Bio</b></label>
                             <input id="bio" class="form-control" name="bio" value="{{user.bio}}">
                         </div>
+
+                        <p class="text-danger justify-content-center" style="text-align:center" id="saveInfoError"></p>
                         <div class="m-2 d-flex justify-content-center">
                             <button type="submit" class="btn btn-dark">Save changes</button>
                         </div>

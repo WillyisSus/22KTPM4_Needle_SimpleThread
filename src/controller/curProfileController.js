@@ -46,7 +46,7 @@ controller.show = async (req, res) => {
 
         res.locals.user = user;
 
-        res.render("cur-profile", {profilePage:true});
+        res.render("cur-profile", { profilePage: true });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server error");
@@ -58,10 +58,21 @@ controller.put = async (req, res) => {
         const user_id = await req.user;
         const user = await models.User.findByPk(user_id);
 
-        const { display_name, bio, avatar } = req.body;
+        const { username, bio, avatar } = req.body;
+        console.log(username);
+        if (username) {
 
-        if (display_name) {
-            user.display_name = display_name;
+            if (!new RegExp(/^[a-zA-Z0-9]{6,32}$/, "i").exec(username)) {
+                res.status(400).send("Username must be between 6 to 32 characters and contain only letters and numbers.");
+                return;
+            }
+
+            if (await models.User.findOne({ where: { username } })) {
+                res.status(400).send("This username has been taken");
+                return;
+            }
+
+            user.username = username;
         }
         if (bio) {
             user.bio = bio;
@@ -71,7 +82,7 @@ controller.put = async (req, res) => {
         }
 
         await models.User.update({
-            display_name: user.display_name,
+            username: user.username,
             bio: user.bio,
             avatar: user.avatar
         }, {
